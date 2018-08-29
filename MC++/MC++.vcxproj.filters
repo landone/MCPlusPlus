@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{0024e01f-b8fc-45eb-a35b-549923590069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shaders">
+      <UniqueIdentifier>{7ced19f4-0934-48bb-9ad4-1001986f71d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{6372c523-c9da-4057-b2ad-1b4f75d6c32f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ceffc8f3-a1f6-4ec9-a77d-c90f7db2a146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{416f793b-1046-4681-b72a-9921e7081608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Mechanic">
+      <UniqueIdentifier>{ac2f501b-3e3f-4130-adf3-5a064fd043d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{f4977933-deb7-4541-b331-5b104ba9b6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Enums">
+      <UniqueIdentifier>{8916136b-1664-49d9-b15c-dbe03d4b77bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Mechanic\Display">
+      <UniqueIdentifier>{27f2907f-8bff-4c17-a7b9-39a4714de558}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GBuffer.cpp">
+      <Filter>Graphics\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="LightShader.cpp">
+      <Filter>Graphics\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessor.cpp">
+      <Filter>Graphics\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Evt_Keyboard.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Evt_Mouse.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Graphics\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Evt_Display.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockFace.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTextureLoader.cpp">
+      <Filter>Game\Mechanic</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Game\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Game\Mechanic\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Game\Mechanic\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="GameDisplay.cpp">
+      <Filter>Game\Mechanic\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Mechanic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Light.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GBuffer.h">
+      <Filter>Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="LightShader.h">
+      <Filter>Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessor.h">
+      <Filter>Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Evt_Keyboard.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Evt_Mouse.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Evt_Display.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockFace.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTextureLoader.h">
+      <Filter>Game\Mechanic</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockFaceDirection.h">
+      <Filter>Game\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Game\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Game\Mechanic\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
+      <Filter>Game\Mechanic\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDisplay.h">
+      <Filter>Game\Mechanic\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Mechanic</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\gBuffer.fs">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\shaders\gBuffer.vs">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\shaders\lightShader.fs">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\shaders\lightShader.vs">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\shaders\postShader.fs">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\shaders\postShader.vs">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+</Project>
