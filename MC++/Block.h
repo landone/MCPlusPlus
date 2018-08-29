@@ -5,7 +5,9 @@
 #include "BlockFace.h"
 #include "GBuffer.h"
 
-#include <string>
+#include <vector>
+
+using namespace std;
 
 class Block {
 public:
@@ -20,14 +22,16 @@ public:
 	void move(glm::vec3 amt);
 	void setRotation(glm::vec3 rot);
 	void setMaterial(MATERIAL mat);
-	void toggleFace(BlockFaceDirection, bool);
+	void setFaceVisibility(BlockFaceDirection dir, bool set);
 
 	glm::vec3 getPosition() { return trans.GetPos(); }
 	MATERIAL getMaterial() { return mat; }
-	bool isFaceVisible(BlockFaceDirection);
+	BlockFace& getFace(BlockFaceDirection dir) { return faces[dir]; }
+	bool isFaceVisible(BlockFaceDirection dir);
 
 private:
 	Transform trans;
 	MATERIAL mat;
 	BlockFace faces[6];
+	vector<BlockFace*> visibleFaces;
 };

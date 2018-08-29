@@ -11,15 +11,11 @@ public:
 	BlockFace(BlockFaceDirection dir, MATERIAL mat);
 
 	void setMaterial(MATERIAL t);
-	void toggle(bool set) { visible = set; }
 	void draw();
-
-	bool isVisible() { return visible; }
 
 private:
 	Texture* myTex = nullptr;
 	Mesh* myMesh = nullptr;
-	bool visible = false;
 
 	static Mesh** meshes;
 	static std::vector<Vertex> verts[6];

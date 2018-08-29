@@ -69,10 +69,6 @@ void BlockFace::setMaterial(MATERIAL t) {
 
 void BlockFace::draw() {
 
-	if (!visible) {
-		return;
-	}
-
 	myTex->bind();
 	myMesh->draw();
 

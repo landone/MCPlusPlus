@@ -2,6 +2,8 @@
 
 #include <random>
 
+unsigned int Chunk::seed = rand();
+
 Chunk::Chunk(int x, int z) {
 
 	this->pos = glm::vec2(x, z);
@@ -14,43 +16,32 @@ Chunk::Chunk(int x, int z) {
 			for (int z = 0; z < DEPTH; z++) {
 
 				Block& b = planes[y]->blocks[x][z];
-
-				//b.setMaterial((MATERIAL)(rand() % MATERIAL::TOTAL));
 				b.setPosition(glm::vec3(pos.x*WIDTH + x, y, pos.y*DEPTH + z));
 
-				if (y == 0 || y == HEIGHT - 1) {
-					if (pos.x == 0 && pos.y == 0 && x == WIDTH / 2 && z == DEPTH / 2) {
-						b.setMaterial(MATERIAL::BEDROCK);
-					}
-					else {
-						b.setMaterial(MATERIAL::LOG_OAK);
-					}
-					drawBlocks.push_back(&b);
-				}
-				else if (x == 0 || x == WIDTH - 1) {
-					b.setMaterial(MATERIAL::STONEBRICK);
-					drawBlocks.push_back(&b);
-				}
-				else if (z == 0 || z == DEPTH - 1) {
-					b.setMaterial(MATERIAL::COBBLESTONE);
-					drawBlocks.push_back(&b);
-				}
-				else {
-					b.setMaterial(MATERIAL::PLANKS_OAK);
+				glm::vec3 pos = b.getPosition();
+				MATERIAL myMat = getBlockSeed(pos);
+				b.setMaterial(myMat);
+				if (myMat == AIR) {//Don't add AIR blocks to draw vector
+					continue;
 				}
 
-				if (y == 0)
-					b.toggleFace(DOWN, true);
-				if (y == HEIGHT - 1)
-					b.toggleFace(UP, true);
-				if (x == 0)
-					b.toggleFace(SOUTH, true);
-				if (x == WIDTH - 1)
-					b.toggleFace(NORTH, true);
-				if (z == 0)
-					b.toggleFace(WEST, true);
-				if (z == DEPTH - 1)
-					b.toggleFace(EAST, true);
+				MATERIAL surround[6] = {//Corresponding to block face directions
+					getBlockSeed(pos + glm::vec3(1,0,0)), getBlockSeed(pos + glm::vec3(-1,0,0)),
+					getBlockSeed(pos + glm::vec3(0,0,1)), getBlockSeed(pos + glm::vec3(0,0,-1)),
+					getBlockSeed(pos + glm::vec3(0,1,0)), getBlockSeed(pos + glm::vec3(0,-1,0)),
+				};
+
+				bool visible = false;
+				for (int i = 0; i < 6; i++) {
+					if (surround[i] == AIR) {
+						visible = true;
+						b.setFaceVisibility((BlockFaceDirection)i, true);
+					}
+				}
+				
+				if (visible) {
+					drawBlocks.push_back(&b);
+				}
 
 			}
 		}
@@ -62,6 +53,37 @@ Chunk::~Chunk() {
 
 	for (int y = 0; y < HEIGHT; y++) {
 		delete planes[y];
+	}
+
+}
+
+void Chunk::setSeed(unsigned int seed) {
+
+	Chunk::seed = seed;
+
+}
+
+MATERIAL Chunk::getBlockSeed(glm::vec3 pos) {
+
+	int x = (int)pos.x;
+	int y = (int)pos.y;
+	int z = (int)pos.z;
+
+	if (z >= DEPTH * 2 || z < DEPTH * -1 || x >= WIDTH * 2 || x < WIDTH * -1) {
+		return AIR;
+	}
+
+	if (y > 4 || y < 0) {
+		return AIR;
+	}
+	else if (y == 4) {
+		return GRASS;
+	}
+	else if (y > 0) {
+		return STONE;
+	}
+	else {
+		return BEDROCK;
 	}
 
 }

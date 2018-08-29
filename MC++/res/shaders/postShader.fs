@@ -77,7 +77,7 @@ void applyFXAA(){
 	
 	float FXAA_SPAN_MAX = 6000.0;
     float FXAA_REDUCE_MUL = 1.0/8.0;
-    float FXAA_REDUCE_MIN = 1.0/128.0;
+    float FXAA_REDUCE_MIN = 1.0/256.0;
 
     vec3 rgbNW=texture2D(preProcess,texCo+(vec2(-1.0,-1.0)*invTexSize)).xyz;
     vec3 rgbNE=texture2D(preProcess,texCo+(vec2(1.0,-1.0)*invTexSize)).xyz;

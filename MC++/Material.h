@@ -3,6 +3,7 @@
 #include <string>
 
 enum MATERIAL {
+	AIR = 0,
 	BEDROCK,
 	BRICK,
 	DIRT,
