@@ -20,7 +20,7 @@ public:
 	void onMouseMotion(double, double) override;
 	void onMouseWheel(double) override;
 
-	void onFrame(double delta) override;//Add movement here
+	void onFrame(double delta) override;
 
 private:
 

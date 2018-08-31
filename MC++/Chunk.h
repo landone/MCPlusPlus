@@ -10,13 +10,16 @@ using namespace std;
 class Chunk : public DisplayListener{
 public:
 
-	Chunk() : Chunk(0, 0) {}
-	Chunk(int x, int z);
+	static const int WIDTH = 5, HEIGHT = 10, DEPTH = 5;
+
+	Chunk();
 	~Chunk();
 
 	void onDrawGeometry(GBuffer& gBuffer);
-
+	void initialize(int x, int z);
 	void setPosition(int x, int z);
+
+	Block* getBlockAt(int x, int y, int z);
 
 	static void setSeed(unsigned int seed);
 
@@ -28,16 +31,24 @@ public:
 	static MATERIAL getBlockSeed(glm::vec3 pos);
 
 private:
-	static const int WIDTH = 5, HEIGHT = 5, DEPTH = 5;
 	static unsigned int seed;
 
-	glm::vec2 pos;//Position relative to chunks, not world
+	bool initialized = false;
+
+	//Position in chunk grid
+	glm::vec2 pos;
 
 	struct Plane {
 		Block blocks[WIDTH][DEPTH];
 	};
-	Plane* planes[HEIGHT];//Store blocks as planes to avoid a single huge memory grouping
+	//Store blocks as planes to avoid a single huge memory grouping
+	Plane* planes[HEIGHT];
 	
-	vector<Block*> drawBlocks;//Visible blocks to draw
+	//Visible blocks to draw
+	vector<Block*> drawBlocks;
+
+	//TODO: Fix this function to somehow use getBlockAt() rather than getBlockSeed()
+	//		Should probably honestly move this function to World
+	void updateVisibility(Block& b);
 
 };

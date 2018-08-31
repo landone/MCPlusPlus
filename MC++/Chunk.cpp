@@ -4,8 +4,9 @@
 
 unsigned int Chunk::seed = rand();
 
-Chunk::Chunk(int x, int z) {
+void Chunk::initialize(int x, int z) {
 
+	initialized = true;
 	this->pos = glm::vec2(x, z);
 
 	for (int y = 0; y < HEIGHT; y++) {
@@ -16,32 +17,11 @@ Chunk::Chunk(int x, int z) {
 			for (int z = 0; z < DEPTH; z++) {
 
 				Block& b = planes[y]->blocks[x][z];
-				b.setPosition(glm::vec3(pos.x*WIDTH + x, y, pos.y*DEPTH + z));
+				glm::vec3 blockPos(pos.x*WIDTH + x, y, pos.y*DEPTH + z);
+				b.setPosition(blockPos);
+				b.setMaterial(getBlockSeed(blockPos));
 
-				glm::vec3 pos = b.getPosition();
-				MATERIAL myMat = getBlockSeed(pos);
-				b.setMaterial(myMat);
-				if (myMat == AIR) {//Don't add AIR blocks to draw vector
-					continue;
-				}
-
-				MATERIAL surround[6] = {//Corresponding to block face directions
-					getBlockSeed(pos + glm::vec3(1,0,0)), getBlockSeed(pos + glm::vec3(-1,0,0)),
-					getBlockSeed(pos + glm::vec3(0,0,1)), getBlockSeed(pos + glm::vec3(0,0,-1)),
-					getBlockSeed(pos + glm::vec3(0,1,0)), getBlockSeed(pos + glm::vec3(0,-1,0)),
-				};
-
-				bool visible = false;
-				for (int i = 0; i < 6; i++) {
-					if (surround[i] == AIR) {
-						visible = true;
-						b.setFaceVisibility((BlockFaceDirection)i, true);
-					}
-				}
-				
-				if (visible) {
-					drawBlocks.push_back(&b);
-				}
+				updateVisibility(b);
 
 			}
 		}
@@ -49,10 +29,18 @@ Chunk::Chunk(int x, int z) {
 
 }
 
+Chunk::Chunk() {
+
+	//Do nothing
+
+}
+
 Chunk::~Chunk() {
 
-	for (int y = 0; y < HEIGHT; y++) {
-		delete planes[y];
+	if (initialized) {
+		for (int y = 0; y < HEIGHT; y++) {
+			delete planes[y];
+		}
 	}
 
 }
@@ -63,13 +51,24 @@ void Chunk::setSeed(unsigned int seed) {
 
 }
 
+Block* Chunk::getBlockAt(int x, int y, int z) {
+
+	if (x < 0 || y < 0 || z < 0 ||
+		x >= WIDTH || y >= HEIGHT || z >= DEPTH) {
+		return nullptr;
+	}
+
+	return &planes[y]->blocks[x][z];
+
+}
+
 MATERIAL Chunk::getBlockSeed(glm::vec3 pos) {
 
 	int x = (int)pos.x;
 	int y = (int)pos.y;
 	int z = (int)pos.z;
 
-	if (z >= DEPTH * 2 || z < DEPTH * -1 || x >= WIDTH * 2 || x < WIDTH * -1) {
+	if (z >= DEPTH * 3 || z < 0 || x >= WIDTH * 3 || x < 0) {
 		return AIR;
 	}
 
@@ -84,6 +83,49 @@ MATERIAL Chunk::getBlockSeed(glm::vec3 pos) {
 	}
 	else {
 		return BEDROCK;
+	}
+
+}
+
+void Chunk::updateVisibility(Block& b){
+
+	unsigned int index = find(drawBlocks.begin(), drawBlocks.end(), &b) - drawBlocks.begin();
+
+	if (b.getMaterial() == AIR) {//Don't add AIR blocks to draw vector
+
+		if (index < drawBlocks.size()) {//Needs to be removed
+			drawBlocks.erase(drawBlocks.begin() + index);
+		}
+
+		return;
+	}
+
+	glm::vec3 bPos = b.getPosition();
+
+	MATERIAL surround[6] = {//Corresponding to block face directions
+		getBlockSeed(bPos + glm::vec3(1,0,0)), getBlockSeed(bPos + glm::vec3(-1,0,0)),
+		getBlockSeed(bPos + glm::vec3(0,0,1)), getBlockSeed(bPos + glm::vec3(0,0,-1)),
+		getBlockSeed(bPos + glm::vec3(0,1,0)), getBlockSeed(bPos + glm::vec3(0,-1,0)),
+	};
+
+	bool visible = false;
+	for (int i = 0; i < 6; i++) {
+
+		BlockFaceDirection dir = (BlockFaceDirection)i;
+		if (surround[i] == AIR) {
+			visible = true;
+			b.setFaceVisibility(dir, true);
+		}else{
+			b.setFaceVisibility(dir, false);
+		}
+
+	}
+
+	if (visible && index == drawBlocks.size()) {//If needs to be added
+		drawBlocks.push_back(&b);
+	}
+	else if (!visible && index < drawBlocks.size()){//If needs to be removed
+		drawBlocks.erase(drawBlocks.begin() + index);
 	}
 
 }

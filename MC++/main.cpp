@@ -6,12 +6,13 @@
 #include "Evt_Display.h"
 #include "Camera.h"
 #include "GameTextureLoader.h"
-#include "Chunk.h"
+#include "World.h"
 #include "Player.h"
 
 int main() {
 	
 	srand(clock());//Allow random number gens
+	Chunk::setSeed(rand());
 
 	GameDisplay disp(1920, 1080, "MC++");
 	disp.hideCursor(true);
@@ -23,14 +24,12 @@ int main() {
 	Camera* cam = player.getCamera();
 	Camera* guiCam = Camera::create();
 
+	World world;
+
 	long lastFrame = clock(), thisFrame = 0;
 
 	player.setPos(2, 6.5, 2.5);
 	cam->rotate(glm::vec3(0, -3.1415 * 135 / 180, 0));
-
-	Chunk::setSeed(rand());
-	Chunk c1, c2(0, 1), c3(1, 0), c4(1, 1), c5(-1, 0), c6(0, -1), 
-		c7(-1, -1), c8(-1, 1), c9(1, -1);
 
 	double fps = 0;
 	int fpsCounter = 0;
