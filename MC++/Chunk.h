@@ -38,10 +38,10 @@ private:
 	//Position in chunk grid
 	glm::vec2 pos;
 
+	//Store blocks as planes to avoid a single huge memory grouping
 	struct Plane {
 		Block blocks[WIDTH][DEPTH];
 	};
-	//Store blocks as planes to avoid a single huge memory grouping
 	Plane* planes[HEIGHT];
 	
 	//Visible blocks to draw

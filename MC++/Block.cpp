@@ -21,6 +21,7 @@ void Block::draw(GBuffer& gbuf) {
 }
 
 void Block::setMaterial(MATERIAL mat) {
+	this->mat = mat;
 	for (int i = 0; i < 6; i++) {
 		faces[i].setMaterial(mat);
 	}

@@ -14,7 +14,7 @@ int main() {
 	srand(clock());//Allow random number gens
 	Chunk::setSeed(rand());
 
-	GameDisplay disp(1920, 1080, "MC++");
+	GameDisplay disp(1600, 900, "MC++");
 	disp.hideCursor(true);
 	disp.relativeCursor(true);
 

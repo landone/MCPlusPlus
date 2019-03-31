@@ -1,6 +1,7 @@
 #include "Chunk.h"
 
 #include <random>
+#include <iostream>
 
 unsigned int Chunk::seed = rand();
 
@@ -96,7 +97,6 @@ void Chunk::updateVisibility(Block& b){
 		if (index < drawBlocks.size()) {//Needs to be removed
 			drawBlocks.erase(drawBlocks.begin() + index);
 		}
-
 		return;
 	}
 
