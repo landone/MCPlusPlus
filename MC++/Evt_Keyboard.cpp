@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iostream>
 
-bool Evt_Keyboard::keys[TOTAL] = { false };
+bool Evt_Keyboard::keys[KEY_TOTAL] = { false };
 
 std::vector<KeyboardListener*> Evt_Keyboard::listeners = {};
 

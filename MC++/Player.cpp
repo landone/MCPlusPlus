@@ -1,11 +1,9 @@
 #include "Player.h"
 #include "Evt_Keyboard.h"
-
+#include "World.h"
 #include <iostream>
 
-Player::Player() {
-
-	
+Player::Player(World& wrld) : world(wrld) {
 
 }
 
@@ -13,6 +11,68 @@ Player::~Player() {
 
 	//Rewrite camera to not use pointers
 	//cam->destroy();
+
+}
+
+void Player::onMousePress(int button, int x, int y) {
+
+	if (button == 0) {
+		glm::vec3 pos = getPos();
+		glm::vec3 dir = cam->getForward();
+		for (int i = 0; i <= reach; i++) {
+			Block* block = world.getBlockAt(pos);
+			if (block && block->getMaterial() != AIR) {
+				if (block->getMaterial() == COBBLESTONE_MOSSY) {
+					block->setMaterial(STONEBRICK);
+				}else{
+					block->setMaterial(COBBLESTONE_MOSSY);
+				}
+				break;
+			}
+			float dist[3];
+			bool approx[3];
+			dist[0] = floorf(pos[0]);
+			approx[0] = pos[0] - dist[0] < 0.00005f;
+			dist[0] = dir[0] > 0 ? dist[0] + 1.0f : (approx[0] ? dist[0] - 1.0f : dist[0]);
+			dist[0] -= pos[0];
+			dist[1] = floorf(pos[1]);
+			approx[1] = pos[1] - dist[1] < 0.00005f;
+			dist[1] = dir[1] > 0 ? dist[1] + 1.0f : (approx[1] ? dist[1] - 1.0f : dist[1]);
+			dist[1] -= pos[1];
+			dist[2] = floorf(pos[2]);
+			approx[2] = pos[2] - dist[2] < 0.00005f;
+			dist[2] = dir[2] > 0 ? dist[2] + 1.0f : (approx[2] ? dist[2] - 1.0f : dist[2]);
+			dist[2] -= pos[2];
+			float ratios[3];
+			ratios[0] = dist[0] / dir[0];
+			ratios[1] = dist[1] / dir[1];
+			ratios[2] = dist[2] / dir[2];
+			if (ratios[0] < ratios[1] && ratios[0] < ratios[2]) {
+				pos[0] += dist[0];
+				pos[1] += ratios[0] * dir[1];
+				pos[2] += ratios[0] * dir[2];
+				if (dir[0] <= 0 && !approx[0]) {
+					pos[0] -= 0.0001f;
+				}
+			}
+			else if (ratios[1] < ratios[2] && ratios[1] < ratios[0]) {
+				pos[1] += dist[1];
+				pos[0] += ratios[1] * dir[0];
+				pos[2] += ratios[1] * dir[2];
+				if (dir[1] <= 0 && !approx[1]) {
+					pos[1] -= 0.0001f;
+				}
+			}
+			else {
+				pos[2] += dist[2];
+				pos[1] += ratios[2] * dir[1];
+				pos[0] += ratios[2] * dir[0];
+				if (dir[2] < 0 && !approx[2]) {
+					pos[2] -= 0.0001f;
+				}
+			}
+		}
+	}
 
 }
 

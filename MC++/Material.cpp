@@ -2,7 +2,7 @@
 
 using namespace std;
 
-string Material::names[TOTAL][2] = {
+string Material::names[MAT_TOTAL][2] = {
 	{"air", "Air"},
 	{ "bedrock", "Bedrock" },
 	{ "brick", "Brick" },

@@ -2,6 +2,7 @@
 
 #include "GL/glew.h"
 #include "Transform.h"
+#include <string>
 
 class Shader {
 public:

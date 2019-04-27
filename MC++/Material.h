@@ -2,7 +2,7 @@
 
 #include <string>
 
-enum MATERIAL {
+enum MATERIAL{
 	AIR = 0,
 	BEDROCK,
 	BRICK,
@@ -17,7 +17,7 @@ enum MATERIAL {
 	COBBLESTONE_MOSSY,
 	LOG_OAK,
 	LOG_OAK_TOP,
-	TOTAL
+	MAT_TOTAL
 };
 
 class Material {
@@ -26,5 +26,5 @@ public:
 	static std::string getName(MATERIAL mat, bool fileName = false);
 
 private:
-	static std::string names[TOTAL][2];
+	static std::string names[MAT_TOTAL][2];
 };

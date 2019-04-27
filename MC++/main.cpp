@@ -8,6 +8,7 @@
 #include "GameTextureLoader.h"
 #include "World.h"
 #include "Player.h"
+#include "Graphic.h"
 
 int main() {
 	
@@ -20,22 +21,29 @@ int main() {
 
 	GameTextureLoader::loadMaterials();
 
-	Player player;
+	World world;
+
+	Player player(world);
 	Camera* cam = player.getCamera();
 	Camera* guiCam = Camera::create();
-
-	World world;
 
 	long lastFrame = clock(), thisFrame = 0;
 
 	player.setPos(2, 6.5, 2.5);
-	cam->rotate(glm::vec3(0, -3.1415 * 135 / 180, 0));
+	cam->setRot(glm::vec3());
+	//cam->rotate(glm::vec3(0, -3.1415 * 135 / 180, 0));
+
+	world.getBlockAt(2,4,2)->setMaterial(MATERIAL::BRICK);
 
 	double fps = 0;
 	int fpsCounter = 0;
 	bool printFPS = false;
 
 	float counter = 0.0f;
+
+	Texture crosshairs;
+	crosshairs.Load("./res/textures/gui/crosshairs.jpg");
+	Graphic graphic(crosshairs);
 
 	while (disp.isOpen()) {
 
@@ -61,10 +69,12 @@ int main() {
 		disp.gBuffer.setViewMat(cam->getViewMatrix());
 		Evt_Display::sendDrawGeometry(disp.gBuffer);
 
-		disp.gBuffer.setViewMat(guiCam->getViewMatrix());
+		//disp.gBuffer.setViewMat(guiCam->getViewMatrix());
+		disp.gBuffer.setGUI(true);
 		glDisable(GL_DEPTH_TEST);
 		Evt_Display::sendDrawGUI(disp.gBuffer);
 		glEnable(GL_DEPTH_TEST);
+		disp.gBuffer.setGUI(false);
 
 		disp.lightShader.bind();
 		disp.lightShader.setCameraPos(cam->getPos());

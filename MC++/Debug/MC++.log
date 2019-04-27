@@ -1,2 +1,8 @@
-﻿  main.cpp
+﻿  Player.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\World.h(10): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  World.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\World.h(10): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\World.h(10): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
   MC++.vcxproj -> C:\Users\animo\Documents\GitHub\MCPlusPlus\Debug\MC++.exe

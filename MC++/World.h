@@ -7,6 +7,7 @@ public:
 
 	World();
 
+	Block* getBlockAt(glm::vec3 pos) { return getBlockAt(floor(pos.x), floor(pos.y), floor(pos.z)); }
 	Block* getBlockAt(int x, int y, int z);
 
 private:

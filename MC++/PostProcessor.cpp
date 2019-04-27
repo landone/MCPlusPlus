@@ -1,6 +1,7 @@
 #include "PostProcessor.h"
 #include "Display.h"
 #include <math.h>
+#include <string>
 
 static const std::string SHADER_PATH = "./res/shaders/postShader";
 

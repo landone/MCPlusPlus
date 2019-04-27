@@ -33,7 +33,7 @@ public:
 private:
 	GLuint VAO = NULL, VBO = NULL, EBO = NULL;
 	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices; GLuint indexSize;
+	std::vector<GLuint> indices; GLuint indexSize = 0;
 	void setupMesh();
 
 	glm::vec2 textureScale = glm::vec2(1, 1);

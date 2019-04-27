@@ -1,4 +1,5 @@
 #include "GBuffer.h"
+#include <string>
 
 const std::string GBuffer::SHADER_PATH = "./res/shaders/gBuffer";
 

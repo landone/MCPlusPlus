@@ -8,7 +8,7 @@ enum KEY {
 	KEY_W, KEY_A, KEY_S, KEY_D,
 	KEY_SPACE,
 	KEY_LSHIFT,
-	TOTAL
+	KEY_TOTAL
 };
 
 class KeyboardListener {
@@ -35,7 +35,7 @@ public:
 
 private:
 
-	static bool keys[TOTAL];
+	static bool keys[KEY_TOTAL];
 	static std::vector<KeyboardListener*> listeners;
 
 	static KEY keyCodeToEnum(SDL_Keycode);

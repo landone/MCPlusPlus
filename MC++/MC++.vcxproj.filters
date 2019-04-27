@@ -91,14 +91,17 @@
     <ClCompile Include="Display.cpp">
       <Filter>Game\Mechanic\Display</Filter>
     </ClCompile>
-    <ClCompile Include="GameDisplay.cpp">
-      <Filter>Game\Mechanic\Display</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\Mechanic</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameDisplay.cpp">
+      <Filter>Game\Mechanic\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
