@@ -7,6 +7,8 @@
 
 using namespace std;
 
+class World;
+
 class Chunk : public DisplayListener{
 public:
 
@@ -22,6 +24,10 @@ public:
 	Block* getBlockAt(int x, int y, int z);
 
 	static void setSeed(unsigned int seed);
+
+	//Updates existence in draw blocks vector
+	void updateVisibility(Block& b);
+	void updateAllVisibility(World& world);
 
 	/*
 		Determines material a block would be seeded.
@@ -42,13 +48,9 @@ private:
 	struct Plane {
 		Block blocks[WIDTH][DEPTH];
 	};
-	Plane* planes[HEIGHT];
+	Plane* planes[HEIGHT] = { nullptr };
 	
 	//Visible blocks to draw
 	vector<Block*> drawBlocks;
-
-	//TODO: Fix this function to somehow use getBlockAt() rather than getBlockSeed()
-	//		Should probably honestly move this function to World
-	void updateVisibility(Block& b);
 
 };

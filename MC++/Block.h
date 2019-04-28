@@ -28,6 +28,7 @@ public:
 	MATERIAL getMaterial() { return mat; }
 	BlockFace& getFace(BlockFaceDirection dir) { return faces[dir]; }
 	bool isFaceVisible(BlockFaceDirection dir);
+	bool isVisible() { return visibleFaces.size() > 0; }
 
 private:
 	Transform trans;

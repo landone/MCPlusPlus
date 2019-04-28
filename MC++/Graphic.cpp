@@ -18,6 +18,10 @@ Graphic::Graphic(Texture& tex) {
 	trans.SetPos(glm::vec3(-0.04, -0.04, 0));
 }
 
+void Graphic::setTexture(Texture& tex) {
+	this->tex = tex;
+}
+
 void Graphic::onDrawGUI(GBuffer& gBuffer) {
 	
 	gBuffer.setTransMat(trans.GetMatrix());

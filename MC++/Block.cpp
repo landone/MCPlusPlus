@@ -22,8 +22,26 @@ void Block::draw(GBuffer& gbuf) {
 
 void Block::setMaterial(MATERIAL mat) {
 	this->mat = mat;
-	for (int i = 0; i < 6; i++) {
-		faces[i].setMaterial(mat);
+	if (mat == GRASS) {
+		faces[UP].setMaterial(GRASS);
+		faces[DOWN].setMaterial(DIRT);
+		faces[NORTH].setMaterial(GRASS_SIDE);
+		faces[SOUTH].setMaterial(GRASS_SIDE);
+		faces[WEST].setMaterial(GRASS_SIDE);
+		faces[EAST].setMaterial(GRASS_SIDE);
+	}
+	else if (mat == LOG_OAK) {
+		faces[UP].setMaterial(LOG_OAK_TOP);
+		faces[DOWN].setMaterial(LOG_OAK_TOP);
+		faces[NORTH].setMaterial(LOG_OAK);
+		faces[SOUTH].setMaterial(LOG_OAK);
+		faces[WEST].setMaterial(LOG_OAK);
+		faces[EAST].setMaterial(LOG_OAK);
+	}
+	else {
+		for (int i = 0; i < 6; i++) {
+			faces[i].setMaterial(mat);
+		}
 	}
 }
 

@@ -10,6 +10,7 @@ class Graphic : public DisplayListener {
 public:
 
 	Graphic(Texture& tex);
+	void setTexture(Texture& tex);
 
 	void onDrawGUI(GBuffer& gBuffer) override;
 

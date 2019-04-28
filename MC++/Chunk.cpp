@@ -1,4 +1,5 @@
 #include "Chunk.h"
+#include "World.h"
 
 #include <random>
 #include <iostream>
@@ -22,8 +23,19 @@ void Chunk::initialize(int x, int z) {
 				b.setPosition(blockPos);
 				b.setMaterial(getBlockSeed(blockPos));
 
-				updateVisibility(b);
+			}
+		}
+	}
 
+}
+
+void Chunk::updateAllVisibility(World& world) {
+
+	for (int y = 0; y < HEIGHT; y++) {
+		Plane& plane = *planes[y];
+		for (int x = 0; x < WIDTH; x++) {
+			for (int z = 0; z < DEPTH; z++) {
+				world.updateVisibility(&(plane.blocks[x][z]));
 			}
 		}
 	}
@@ -91,41 +103,14 @@ MATERIAL Chunk::getBlockSeed(glm::vec3 pos) {
 void Chunk::updateVisibility(Block& b){
 
 	unsigned int index = find(drawBlocks.begin(), drawBlocks.end(), &b) - drawBlocks.begin();
-
-	if (b.getMaterial() == AIR) {//Don't add AIR blocks to draw vector
-
-		if (index < drawBlocks.size()) {//Needs to be removed
+	if (b.isVisible()) {
+		if (index == drawBlocks.size()) {//Add if not in
+			drawBlocks.push_back(&b);
+		}
+	} else {
+		if (index < drawBlocks.size()) {//Remove if in
 			drawBlocks.erase(drawBlocks.begin() + index);
 		}
-		return;
-	}
-
-	glm::vec3 bPos = b.getPosition();
-
-	MATERIAL surround[6] = {//Corresponding to block face directions
-		getBlockSeed(bPos + glm::vec3(1,0,0)), getBlockSeed(bPos + glm::vec3(-1,0,0)),
-		getBlockSeed(bPos + glm::vec3(0,0,1)), getBlockSeed(bPos + glm::vec3(0,0,-1)),
-		getBlockSeed(bPos + glm::vec3(0,1,0)), getBlockSeed(bPos + glm::vec3(0,-1,0)),
-	};
-
-	bool visible = false;
-	for (int i = 0; i < 6; i++) {
-
-		BlockFaceDirection dir = (BlockFaceDirection)i;
-		if (surround[i] == AIR) {
-			visible = true;
-			b.setFaceVisibility(dir, true);
-		}else{
-			b.setFaceVisibility(dir, false);
-		}
-
-	}
-
-	if (visible && index == drawBlocks.size()) {//If needs to be added
-		drawBlocks.push_back(&b);
-	}
-	else if (!visible && index < drawBlocks.size()){//If needs to be removed
-		drawBlocks.erase(drawBlocks.begin() + index);
 	}
 
 }
