@@ -7,9 +7,9 @@ public:
 
 	World();
 
-	Block* getBlockAt(glm::vec3 pos) { return getBlockAt(floor(pos.x), floor(pos.y), floor(pos.z)); }
+	Block* getBlockAt(glm::vec3 pos) { return getBlockAt((int)floor(pos.x), (int)floor(pos.y), (int)floor(pos.z)); }
 	Block* getBlockAt(int x, int y, int z);
-	Chunk* getChunkAt(glm::vec3 pos) { return getChunkAt(floor(pos.x), floor(pos.y), floor(pos.z)); }
+	Chunk* getChunkAt(glm::vec3 pos) { return getChunkAt((int)floor(pos.x), (int)floor(pos.y), (int)floor(pos.z)); }
 	Chunk* getChunkAt(int x, int y, int z);
 	void updateVisibility(Block* block);
 

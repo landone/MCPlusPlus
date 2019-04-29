@@ -9,6 +9,7 @@
 #include "World.h"
 #include "Player.h"
 #include "Graphic.h"
+#include "Text.h"
 
 int main() {
 	
@@ -20,6 +21,7 @@ int main() {
 	disp.relativeCursor(true);
 
 	GameTextureLoader::loadMaterials();
+	GameTextureLoader::loadFonts();
 
 	World world;
 
@@ -29,7 +31,7 @@ int main() {
 
 	long lastFrame = clock(), thisFrame = 0;
 
-	player.setPos(2, 6.5, 2.5);
+	player.setPos(2, 26.5, 2.5);
 	cam->setRot(glm::vec3());
 	//cam->rotate(glm::vec3(0, -3.1415 * 135 / 180, 0));
 
@@ -42,8 +44,9 @@ int main() {
 	float counter = 0.0f;
 
 	Texture crosshairs;
-	crosshairs.Load("./res/textures/gui/crosshairs.jpg");
+	crosshairs.Load("./res/texture/gui/crosshairs.jpg");
 	Graphic graphic(crosshairs);
+	Text text("Shrek 2 on Blu-Ray and DVD");
 
 	while (disp.isOpen()) {
 

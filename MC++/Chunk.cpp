@@ -81,18 +81,29 @@ MATERIAL Chunk::getBlockSeed(glm::vec3 pos) {
 	int y = (int)pos.y;
 	int z = (int)pos.z;
 
-	if (z >= DEPTH * 3 || z < 0 || x >= WIDTH * 3 || x < 0) {
+	if (z >= DEPTH * 3 || z < 0 || x >= WIDTH * 3 || x < 0) { //Change hard-coded chunk constants to world variables
 		return AIR;
 	}
 
-	if (y > 4 || y < 0) {
+	if (y > 24 || y < 0) {
 		return AIR;
 	}
-	else if (y == 4) {
+	else if (y == 24) {
 		return GRASS;
 	}
 	else if (y > 0) {
-		return STONE;
+		switch ((int)(abs(sin(x)) * 75 + abs(cos(z)) * 64 + abs(sin(y)) * 64 + abs(cos(y)) * 150) % 230) {
+		case 0:
+			return DIAMOND_ORE;
+		case 1:
+			return COAL_ORE;
+		case 2:
+			return LAPIS_ORE;
+		case 3:
+			return IRON_ORE;
+		default:
+			return STONE;
+		}
 	}
 	else {
 		return BEDROCK;

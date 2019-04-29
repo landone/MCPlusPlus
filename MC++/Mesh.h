@@ -27,6 +27,8 @@ public:
 
 	void setTextureScale(glm::vec2 scale);
 
+	void setQuadTextureCoord(glm::vec2 bottomLeft, glm::vec2 topRight);
+
 	GLuint getVAO() { return VAO; }
 	size_t getIndSize() { return indexSize; }
 

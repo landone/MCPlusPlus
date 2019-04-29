@@ -17,7 +17,11 @@ string Material::names[MAT_TOTAL][2] = {
 	{ "cobblestone", "Cobblestone" },
 	{ "cobblestone_mossy", "Mossy Cobblestone" },
 	{ "log_oak", "Oak Log" },
-	{ "log_oak_top", "Oak Log Top" }
+	{ "log_oak_top", "Oak Log Top" },
+	{"iron_ore", "Iron Ore" },
+	{"lapis_ore", "Lapis Ore" },
+	{"diamond_ore", "Diamond Ore" },
+	{"coal_ore", "Coal Ore" }
 };
 
 std::string Material::getName(MATERIAL mat, bool fileName) {

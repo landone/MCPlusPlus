@@ -12,7 +12,7 @@ class World;
 class Chunk : public DisplayListener{
 public:
 
-	static const int WIDTH = 5, HEIGHT = 10, DEPTH = 5;
+	static const int WIDTH = 8, HEIGHT = 32, DEPTH = 8;
 
 	Chunk();
 	~Chunk();

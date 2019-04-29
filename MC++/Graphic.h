@@ -9,16 +9,19 @@
 class Graphic : public DisplayListener {
 public:
 
+	Graphic() {}
 	Graphic(Texture& tex);
-	void setTexture(Texture& tex);
 
+	void setTexture(Texture& tex);
 	void onDrawGUI(GBuffer& gBuffer) override;
+
+	static Mesh* getQuadMesh() { return mesh; }
 
 	Transform trans;
 
 private:
 
-	Mesh mesh;
+	static Mesh* mesh;
 	Texture tex;
 
 };

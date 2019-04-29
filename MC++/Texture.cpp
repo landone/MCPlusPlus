@@ -4,7 +4,6 @@
 #include "stb_image.h"
 
 static std::map<std::string, GLuint> globals;
-static GLuint lastTexture = NULL;
 
 std::string LowerCase(std::string source) {
 	const char* arr = source.c_str();
@@ -13,10 +12,6 @@ std::string LowerCase(std::string source) {
 		result += tolower(arr[i]);
 	}
 	return result;
-}
-
-GLuint Texture::lastBound() {
-	return lastTexture;
 }
 
 GLuint Texture::CreateTexture(const std::string &fileName) {
@@ -64,11 +59,6 @@ void Texture::unloadAll() {
 }
 
 void Texture::bind() {
-	//assert(unit >= 0 && unit <= 31);
-	//glActiveTexture(GL_TEXTURE0 + unit);
-	//if (lastTexture != m_texture) {//Only bind if necessary
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, m_texture);
-		lastTexture = m_texture;
-	//}
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
 }

@@ -6,10 +6,12 @@
 class Texture {
 public:
 
+	Texture() {}
+	Texture(GLuint tex, int w, int h) { m_texture = tex;  width = w; height = h; }
+
 	Texture& Load(const std::string& fileName);
 	
 	GLuint getIndex() { return m_texture; }
-	static GLuint lastBound();
 
 	static void unloadAll();
 
