@@ -5,6 +5,7 @@ in vec2 TexCoords;
 out vec4 FragColor;
 
 uniform sampler2D texMap;
+uniform vec3 tint;
 
 void main(){
 	
@@ -12,6 +13,6 @@ void main(){
 	if(origColor.a < 1){
 		discard;
 	}
-	FragColor = origColor;
+	FragColor = vec4(origColor.xyz * tint, 1);
 	
 }

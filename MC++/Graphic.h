@@ -9,13 +9,13 @@
 class Graphic : public DisplayListener {
 public:
 
-	Graphic() {}
+	Graphic();
 	Graphic(Texture& tex);
 
 	void setTexture(Texture& tex);
 	void onDrawGUI(GBuffer& gBuffer) override;
 
-	static Mesh* getQuadMesh() { return mesh; }
+	static Mesh* getQuadMesh();
 
 	Transform trans;
 

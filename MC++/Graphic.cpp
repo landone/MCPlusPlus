@@ -12,15 +12,27 @@ Mesh* Graphic::mesh = nullptr;
 static std::vector<GLuint> indices = { 0, 1, 2,
 2, 3, 0 };
 
-Graphic::Graphic(Texture& tex) {
+Mesh* Graphic::getQuadMesh() {
 
 	if (!mesh) {
 		mesh = new Mesh();
 		mesh->Init(face, indices);
 	}
+
+	return mesh;
+
+}
+
+Graphic::Graphic() {
+
+}
+
+Graphic::Graphic(Texture& tex) {
+
+	getQuadMesh();
 	this->tex = tex;
-	trans.SetScale(glm::vec3(0.04, 0.04, 1.0));
-	trans.SetPos(glm::vec3(-0.04, -0.04, 0));
+	trans.SetScale(glm::vec3(0.005 * tex.getWidth()  * 9 / 16, 0.005 * tex.getHeight(), 1.0));
+	trans.SetPos(glm::vec3(-0.005 * tex.getWidth() *9 / 16, -0.005 * tex.getHeight(), 0));
 }
 
 void Graphic::setTexture(Texture& tex) {

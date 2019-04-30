@@ -22,10 +22,10 @@ void main(){
 	vec3 Normal = texture(gNormal, TexCoords).rgb;
 	vec3 TexColor = texture(gColor, TexCoords).rgb;
 
-	/*
-	*B R E A K
-	*
-	*/
+	if(length(FragPos) == 0){
+		outputTex = vec4(0,0.5,1,1);
+		return;
+	}
 
 	if(length(Normal) == 0.0){//Presumably a graphic
 		outputTex = vec4(TexColor, length(TexColor));

@@ -1,8 +1,6 @@
 #pragma once
 
-#include <string>
-
-enum MATERIAL{
+enum MATERIAL {
 	AIR = 0,
 	BEDROCK,
 	BRICK,
@@ -21,8 +19,10 @@ enum MATERIAL{
 	LAPIS_ORE,
 	DIAMOND_ORE,
 	COAL_ORE,
-	MAT_TOTAL
+	MAX_MAT
 };
+
+#include <string>
 
 class Material {
 public:
@@ -30,5 +30,5 @@ public:
 	static std::string getName(MATERIAL mat, bool fileName = false);
 
 private:
-	static std::string names[MAT_TOTAL][2];
+	static std::string names[MAX_MAT][2];
 };

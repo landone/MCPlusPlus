@@ -22,6 +22,7 @@ int main() {
 
 	GameTextureLoader::loadMaterials();
 	GameTextureLoader::loadFonts();
+	GameTextureLoader::loadGUI();
 
 	World world;
 
@@ -33,20 +34,27 @@ int main() {
 
 	player.setPos(2, 26.5, 2.5);
 	cam->setRot(glm::vec3());
-	//cam->rotate(glm::vec3(0, -3.1415 * 135 / 180, 0));
 
 	world.getBlockAt(2,4,2)->setMaterial(MATERIAL::BRICK);
 
 	double fps = 0;
 	int fpsCounter = 0;
-	bool printFPS = false;
+	bool printFPS = true;
 
 	float counter = 0.0f;
 
-	Texture crosshairs;
-	crosshairs.Load("./res/texture/gui/crosshairs.jpg");
-	Graphic graphic(crosshairs);
-	Text text("Shrek 2 on Blu-Ray and DVD");
+	//Texture crosshairs;
+	//crosshairs.Load("./res/texture/gui/crosshairs.jpg");
+	Graphic crosshair(GameTextureLoader::getGUI(GUI_HEART));
+	Graphic hotbar(GameTextureLoader::getGUI(GUI_HOTBAR));
+	hotbar.trans.SetPos(glm::vec3(hotbar.trans.GetPos().x, -1, 0));
+	Text text("Bottom Text");
+	Text thanos("THANOS TEXT");
+	thanos.setSize(0.12);
+	thanos.setColor(glm::vec3(0.6, 0.4, 1));
+	thanos.getGraphic().trans.SetPos(glm::vec3(-1, -1 + 0.12, 0));
+	text.setSize(0.12);
+	text.setColor(glm::vec3(1, 1, 0));
 
 	while (disp.isOpen()) {
 
@@ -61,7 +69,7 @@ int main() {
 			fpsCounter++;
 			if (fpsCounter == 10) {
 
-				std::cout << "FPS: " << (10 / fps) << std::endl;
+				//std::cout << "FPS: " << (10 / fps) << std::endl;
 				fpsCounter = 0;
 				fps = 0.0;
 

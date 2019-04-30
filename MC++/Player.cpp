@@ -42,7 +42,7 @@ void Player::onMousePress(int button, int x, int y) {
 
 void Player::onMouseWheel(double amt) {
 
-	chosenMat = (MATERIAL)(((int)chosenMat - 1 + (amt > 0 ? 1 : MATERIAL::MAT_TOTAL - 2)) % (MATERIAL::MAT_TOTAL - 1) + 1);
+	chosenMat = (MATERIAL)(((int)chosenMat - 1 + (amt > 0 ? 1 : MATERIAL::MAX_MAT - 2)) % (MATERIAL::MAX_MAT - 1) + 1);
 	graphic->setTexture(GameTextureLoader::getMaterial(chosenMat));
 
 	/*static const double MAX = PI * 180 / 360;

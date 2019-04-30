@@ -14,14 +14,9 @@ void applyFXAA();
 
 void main() {
 
-	if(length(texture2D(preProcess, texCo).a) <= 0){
-		FragColor = vec4(0,0.5,1,1);
-		return;
-	}
+	FragColor = texture2D(preProcess, texCo);
 
-	//FragColor = texture2D(preProcess, texCo);
-
-	applyFXAA();
+	//applyFXAA();
 
 	/*//INVERTED COLORS
 	FragColor = vec4(1.0 - texture2D(preProcess, texCo).xyz, 1.0);
