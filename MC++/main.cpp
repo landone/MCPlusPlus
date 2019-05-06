@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Graphic.h"
 #include "Text.h"
+#include "MDL_Human.h"
 
 int main() {
 	
@@ -23,6 +24,7 @@ int main() {
 	GameTextureLoader::loadMaterials();
 	GameTextureLoader::loadFonts();
 	GameTextureLoader::loadGUI();
+	GameTextureLoader::loadEntities();
 
 	World world;
 
@@ -43,9 +45,7 @@ int main() {
 
 	float counter = 0.0f;
 
-	//Texture crosshairs;
-	//crosshairs.Load("./res/texture/gui/crosshairs.jpg");
-	Graphic crosshair(GameTextureLoader::getGUI(GUI_HEART));
+	Graphic crosshair(GameTextureLoader::getGUI(GUI_CROSSHAIR));
 	Graphic hotbar(GameTextureLoader::getGUI(GUI_HOTBAR));
 	hotbar.trans.SetPos(glm::vec3(hotbar.trans.GetPos().x, -1, 0));
 	Text text("Bottom Text");
@@ -56,9 +56,18 @@ int main() {
 	text.setSize(0.12);
 	text.setColor(glm::vec3(1, 1, 0));
 
+	MDL_Human coot, human;
+	coot.setTex(GameTextureLoader::getEntity(ENT_HUMAN_COOT));
+	coot.setPos(glm::vec3(5.5, 25, 5.5));
+	human.setTex(GameTextureLoader::getEntity(ENT_HUMAN));
+	human.setPos(glm::vec3(6.5, 25, 5.5));
+
 	while (disp.isOpen()) {
 
 		counter += 0.05f;
+
+		coot.setArmRotation(glm::vec3(sin(counter*2)*3.1415/3, 0, 0), false);
+		coot.setArmRotation(glm::vec3(cos(counter*2) * 3.1415 / 3, 0, 0), true);
 
 		thisFrame = clock();
 		Evt_Display::sendFrame((thisFrame - lastFrame) / 1000.0);

@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Material.h"
 #include "Text.h"
+#include "Entities.h"
 #include "GUI_Components.h"
 
 class GameTextureLoader {
@@ -11,6 +12,7 @@ public:
 	static void loadMaterials();
 	static void loadFonts();
 	static void loadGUI();
+	static void loadEntities();
 
 	static Texture& getMaterial(MATERIAL m) {
 		return mats[(int)m];
@@ -24,10 +26,15 @@ public:
 		return gui[g];
 	}
 
+	static Texture& getEntity(ENTITIES e) {
+		return ents[e];
+	}
+
 private:
 	static Texture mats[MATERIAL::MAX_MAT];
 	static Texture fonts[FONT::MAX_FONT];
 	static Texture gui[GUI_Component::MAX_GUI];
+	static Texture ents[ENTITIES::MAX_ENT];
 
 	static Texture crop(BasicShader& shader, Transform& trans, Texture& base, glm::vec2 dim, Mesh& quad,
 		glm::vec2 bottomLeft, glm::vec2 topRight);

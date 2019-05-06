@@ -4,6 +4,7 @@
 Texture GameTextureLoader::mats[MATERIAL::MAX_MAT];//Allocated for entirety of application run
 Texture GameTextureLoader::fonts[FONT::MAX_FONT];
 Texture GameTextureLoader::gui[GUI_Component::MAX_GUI];
+Texture GameTextureLoader::ents[ENTITIES::MAX_ENT];
 
 static const std::string TEXTURE_PATH = "./res/texture/";
 
@@ -48,6 +49,13 @@ void GameTextureLoader::loadGUI() {
 	//Consider unloading gui container textures
 	
 	mesh.setQuadTextureCoord(glm::vec2(0, 0), glm::vec2(1, 1));
+
+}
+
+void GameTextureLoader::loadEntities() {
+
+	ents[ENT_HUMAN].Load(TEXTURE_PATH + "entity/steve.png");
+	ents[ENT_HUMAN_COOT].Load(TEXTURE_PATH + "entity/coot.png");
 
 }
 
