@@ -66,8 +66,14 @@ int main() {
 
 		counter += 0.05f;
 
-		coot.setArmRotation(glm::vec3(sin(counter*2)*3.1415/3, 0, 0), false);
-		coot.setArmRotation(glm::vec3(cos(counter*2) * 3.1415 / 3, 0, 0), true);
+		coot.setBodyRotation(glm::vec3(0, counter, 0));
+		coot.setArmRotation(glm::vec3(counter / 2, 0, 0), false);
+		coot.setArmRotation(glm::vec3(counter / 2, 0, 0), true);
+		coot.setLegRotation(glm::vec3(cos(counter), 0, 0), false);
+		coot.setLegRotation(glm::vec3(cos(counter + 3.1415f), 0, 0), true);
+		coot.setBodyRotation(glm::vec3(counter / 2, 0, 0));
+		coot.setPos(glm::vec3(5.5+sin(counter)*3, 25, 5.5 + cos(counter)*3));
+		human.setHeadRotation(glm::vec3(sin(counter), 0, 0));
 
 		thisFrame = clock();
 		Evt_Display::sendFrame((thisFrame - lastFrame) / 1000.0);

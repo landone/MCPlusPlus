@@ -224,12 +224,8 @@ MDL_Human::MDL_Human() {
 
 void MDL_Human::setPos(vec3 pos) {
 
-	trans[0].SetPos(pos + vec3(0,24,0) * pxSz);
 	trans[1].SetPos(pos + vec3(0,12,0) * pxSz);
-	trans[2].SetPos(pos + vec3(-2,12,0) * pxSz);
-	trans[3].SetPos(pos + vec3(2,12,0) * pxSz);
-	trans[4].SetPos(pos + vec3(-6,24,0) * pxSz);
-	trans[5].SetPos(pos + vec3(6,24,0) * pxSz);
+	updatePositions();
 
 }
 
@@ -241,24 +237,29 @@ void MDL_Human::setTex(Texture tex) {
 
 void MDL_Human::setHeadRotation(vec3 rot) {
 
+	rots[0] = rot;
 	trans[0].SetRot(rot);
 
 }
 
 void MDL_Human::setArmRotation(vec3 rot, bool right) {
 
-	trans[right ? 5 : 4].SetRot(rot);
+	rots[right ? 5 : 4] = rot;
+	trans[right ? 5 : 4].SetRot(rot + trans[1].GetRot());
 
 }
 
 void MDL_Human::setLegRotation(vec3 rot, bool right) {
 
-	trans[right ? 3 : 2].SetRot(rot);
+	rots[right ? 3 : 2] = rot;
+	trans[right ? 3 : 2].SetRot(rot + trans[1].GetRot());
 
 }
 
 void MDL_Human::setBodyRotation(vec3 rot) {
 	trans[1].SetRot(rot);
+	updatePositions();
+	updateRotations();
 }
 
 void MDL_Human::onDrawGeometry(GBuffer& gBuf) {
@@ -269,5 +270,27 @@ void MDL_Human::onDrawGeometry(GBuffer& gBuf) {
 		gBuf.setRotMat(trans[i].GetRotMatrix());
 		meshes[i].draw();
 	}
+
+}
+
+void MDL_Human::updatePositions() {
+
+	mat4 bod = trans[1].GetMatrix();
+	trans[0].SetPos(vec3(bod * vec4(vec3(0, 12, 0) * pxSz, 1)));
+	trans[2].SetPos(vec3(bod * vec4(vec3(-2, 0, 0) * pxSz, 1)));
+	trans[3].SetPos(vec3(bod * vec4(vec3(2, 0, 0) * pxSz, 1)));
+	trans[4].SetPos(vec3(bod * vec4(vec3(-6, 12, 0) * pxSz, 1)));
+	trans[5].SetPos(vec3(bod * vec4(vec3(6, 12, 0) * pxSz, 1)));
+
+}
+
+void MDL_Human::updateRotations() {
+
+	vec3 rot = trans[1].GetRot();
+	trans[0].SetRot(rots[0] + rot);
+	trans[2].SetRot(rots[2] + rot);
+	trans[3].SetRot(rots[3] + rot);
+	trans[4].SetRot(rots[4] + rot);
+	trans[5].SetRot(rots[5] + rot);
 
 }
