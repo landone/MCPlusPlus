@@ -1,7 +1,4 @@
 #include "Mesh.h"
-#include <map>
-#include <iostream>
-#include <string>
 
 Mesh& Mesh::Init(std::vector<Vertex> vertices, std::vector<GLuint> indices) {
 	this->vertices = vertices;

@@ -2,7 +2,7 @@
 #include "Evt_Keyboard.h"
 #include "World.h"
 #include "Graphic.h"
-#include "GameTextureLoader.h"
+#include "GameAssetLoader.h"
 #include <iostream>
 
 static MATERIAL chosenMat = BEDROCK;
@@ -10,7 +10,7 @@ static Graphic* graphic = nullptr;
 
 Player::Player(World& wrld) : world(wrld) {
 	if (graphic == nullptr) {
-		graphic = new Graphic(GameTextureLoader::getMaterial(chosenMat));
+		graphic = new Graphic(GameAssetLoader::getMaterial(chosenMat));
 	}
 	graphic->trans.SetScale(glm::vec3(0.09,0.16,1));
 	graphic->trans.SetPos(glm::vec3(-1, -1, -1));
@@ -43,7 +43,7 @@ void Player::onMousePress(int button, int x, int y) {
 void Player::onMouseWheel(double amt) {
 
 	chosenMat = (MATERIAL)(((int)chosenMat - 1 + (amt > 0 ? 1 : MATERIAL::MAX_MAT - 2)) % (MATERIAL::MAX_MAT - 1) + 1);
-	graphic->setTexture(GameTextureLoader::getMaterial(chosenMat));
+	graphic->setTexture(GameAssetLoader::getMaterial(chosenMat));
 
 	/*static const double MAX = PI * 180 / 360;
 	static const double MIN = PI * 10 / 360;

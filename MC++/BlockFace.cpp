@@ -1,5 +1,5 @@
 #include "BlockFace.h"
-#include "GameTextureLoader.h"
+#include "GameAssetLoader.h"
 
 std::vector<Vertex> BlockFace::verts[6] = {
 	{//XPositive:North
@@ -56,14 +56,14 @@ BlockFace::BlockFace(BlockFaceDirection dir, MATERIAL mat) {
 		}
 	}
 
-	myTex = &GameTextureLoader::getMaterial(mat);
+	myTex = &GameAssetLoader::getMaterial(mat);
 	myMesh = meshes[(int)dir];
 
 }
 
 void BlockFace::setMaterial(MATERIAL t) {
 
-	myTex = &GameTextureLoader::getMaterial(t);
+	myTex = &GameAssetLoader::getMaterial(t);
 
 }
 

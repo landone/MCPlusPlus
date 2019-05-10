@@ -18,7 +18,7 @@ Camera* Camera::create(const glm::vec3& pos, double fov, double aspect, double z
 
 Camera::Camera() {
 
-	initialize(glm::vec3(0, 0, 0), PI * 85 / 360, 16.0 / 9.0, 0.01, 10000);
+	initialize(glm::vec3(0, 0, 0), PI * 140 / 360, 16.0 / 9.0, 0.01, 10000);
 
 }
 

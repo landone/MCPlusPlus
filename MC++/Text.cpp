@@ -1,5 +1,5 @@
 #include "Text.h"
-#include "GameTextureLoader.h"
+#include "GameAssetLoader.h"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ Text::Text(string str) {
 
 	text = str;
 	font_enum = FONT::ASCII;
-	font = GameTextureLoader::getFont(font_enum);
+	font = GameAssetLoader::getFont(font_enum);
 	GLuint gltex;
 	buf = shader->createBuffer();
 	gltex = shader->createTex();
@@ -35,7 +35,7 @@ void Text::setString(std::string str) {
 void Text::setFont(FONT ft) {
 
 	font_enum = ft;
-	font = GameTextureLoader::getFont(font_enum);
+	font = GameAssetLoader::getFont(font_enum);
 	createTexture();
 
 }

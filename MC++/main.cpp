@@ -5,7 +5,7 @@
 #include "GameDisplay.h"
 #include "Evt_Display.h"
 #include "Camera.h"
-#include "GameTextureLoader.h"
+#include "GameAssetLoader.h"
 #include "World.h"
 #include "Player.h"
 #include "Graphic.h"
@@ -21,10 +21,7 @@ int main() {
 	disp.hideCursor(true);
 	disp.relativeCursor(true);
 
-	GameTextureLoader::loadMaterials();
-	GameTextureLoader::loadFonts();
-	GameTextureLoader::loadGUI();
-	GameTextureLoader::loadEntities();
+	GameAssetLoader::loadAll();
 
 	World world;
 
@@ -34,7 +31,8 @@ int main() {
 
 	long lastFrame = clock(), thisFrame = 0;
 
-	player.setPos(2, 26.5, 2.5);
+	//player.setPos(2, 26.5, 2.5);
+	player.setPos(0, 0, 0);
 	cam->setRot(glm::vec3());
 
 	world.getBlockAt(2,4,2)->setMaterial(MATERIAL::BRICK);
@@ -45,8 +43,8 @@ int main() {
 
 	float counter = 0.0f;
 
-	Graphic crosshair(GameTextureLoader::getGUI(GUI_CROSSHAIR));
-	Graphic hotbar(GameTextureLoader::getGUI(GUI_HOTBAR));
+	Graphic crosshair(GameAssetLoader::getGUI(GUI_CROSSHAIR));
+	Graphic hotbar(GameAssetLoader::getGUI(GUI_HOTBAR));
 	hotbar.trans.SetPos(glm::vec3(hotbar.trans.GetPos().x, -1, 0));
 	Text text("Bottom Text");
 	Text thanos("THANOS TEXT");
@@ -57,10 +55,13 @@ int main() {
 	text.setColor(glm::vec3(1, 1, 0));
 
 	MDL_Human coot, human;
-	coot.setTex(GameTextureLoader::getEntity(ENT_HUMAN_COOT));
+	coot.setTex(GameAssetLoader::getEntity(ENT_HUMAN_COOT));
 	coot.setPos(glm::vec3(5.5, 25, 5.5));
-	human.setTex(GameTextureLoader::getEntity(ENT_HUMAN));
+	human.setTex(GameAssetLoader::getEntity(ENT_HUMAN));
 	human.setPos(glm::vec3(6.5, 25, 5.5));
+
+	Mesh mesh = GameAssetLoader::getItemMesh(ITEM::DIAMOND);
+	Texture tex = GameAssetLoader::getItemTex(ITEM::DIAMOND);
 
 	while (disp.isOpen()) {
 
@@ -94,6 +95,11 @@ int main() {
 		disp.gBuffer.bind();
 		disp.gBuffer.setViewMat(cam->getViewMatrix());
 		Evt_Display::sendDrawGeometry(disp.gBuffer);
+
+		disp.gBuffer.setTransMat(glm::mat4());
+		disp.gBuffer.setRotMat(glm::mat4());
+		tex.bind();
+		mesh.draw();
 
 		//disp.gBuffer.setViewMat(guiCam->getViewMatrix());
 		disp.gBuffer.setGUI(true);

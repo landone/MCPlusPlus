@@ -1,5 +1,5 @@
 #include "MDL_Human.h"
-#include "GameTextureLoader.h"
+#include "GameAssetLoader.h"
 
 using namespace glm;
 
@@ -214,7 +214,7 @@ MDL_Human::MDL_Human() {
 		for (int i = 0; i < 6; i++) {
 			meshes[i].Init(verts[i], indices);
 		}
-		tex = GameTextureLoader::getEntity(ENT_HUMAN);
+		tex = GameAssetLoader::getEntity(ENT_HUMAN);
 
 	}
 

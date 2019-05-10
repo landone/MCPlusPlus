@@ -7,7 +7,7 @@ enum FONT {
 
 #include "Graphic.h"
 #include "BasicShader.h"
-#include "GameTextureLoader.h"
+#include "GameAssetLoader.h"
 
 class Text {
 public:
