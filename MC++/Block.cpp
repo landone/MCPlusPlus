@@ -79,3 +79,11 @@ bool Block::isFaceVisible(BlockFaceDirection dir) {
 	return index != visibleFaces.size();
 
 }
+
+void Block::setAllVisible() {
+
+	for (int i = 0; i < 6; i++) {
+		setFaceVisibility((BlockFaceDirection)i, true);
+	}
+
+}

@@ -3,17 +3,20 @@
 #include "World.h"
 #include "Graphic.h"
 #include "GameAssetLoader.h"
-#include <iostream>
+#include "ItemStack.h"
 
 static MATERIAL chosenMat = BEDROCK;
+static ItemStack* item = nullptr;
 static Graphic* graphic = nullptr;
 
 Player::Player(World& wrld) : world(wrld) {
-	if (graphic == nullptr) {
-		graphic = new Graphic(GameAssetLoader::getMaterial(chosenMat));
+	if (item == nullptr) {
+		item = new ItemStack(chosenMat);
+		item->setPhysical(true);
+		item->setGUI(true);
 	}
-	graphic->trans.SetScale(glm::vec3(0.09,0.16,1));
-	graphic->trans.SetPos(glm::vec3(-1, -1, -1));
+	//graphic->trans.SetScale(glm::vec3(0.09,0.16,1));
+	//graphic->trans.SetPos(glm::vec3(-1, -1, -1));
 }
 
 Player::~Player() {
@@ -43,7 +46,8 @@ void Player::onMousePress(int button, int x, int y) {
 void Player::onMouseWheel(double amt) {
 
 	chosenMat = (MATERIAL)(((int)chosenMat - 1 + (amt > 0 ? 1 : MATERIAL::MAX_MAT - 2)) % (MATERIAL::MAX_MAT - 1) + 1);
-	graphic->setTexture(GameAssetLoader::getMaterial(chosenMat));
+	//graphic->setTexture(GameAssetLoader::getMaterial(chosenMat));
+	item->setMaterial(chosenMat);
 
 	/*static const double MAX = PI * 180 / 360;
 	static const double MIN = PI * 10 / 360;

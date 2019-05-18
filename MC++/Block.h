@@ -23,9 +23,11 @@ public:
 	void setRotation(glm::vec3 rot);
 	void setMaterial(MATERIAL mat);
 	void setFaceVisibility(BlockFaceDirection dir, bool set);
+	void setAllVisible();
 
 	glm::vec3 getPosition() { return trans.GetPos(); }
 	MATERIAL getMaterial() { return mat; }
+	Transform& getTrans() { return trans; }
 	BlockFace& getFace(BlockFaceDirection dir) { return faces[dir]; }
 	bool isFaceVisible(BlockFaceDirection dir);
 	bool isVisible() { return visibleFaces.size() > 0; }

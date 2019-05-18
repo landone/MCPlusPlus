@@ -17,7 +17,7 @@ public:
 	Chunk();
 	~Chunk();
 
-	void onDrawGeometry(GBuffer& gBuffer);
+	void onDrawGeometry(GBuffer& gBuffer) override;
 	void initialize(int x, int z);
 	void setPosition(int x, int z);
 

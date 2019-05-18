@@ -24,6 +24,12 @@ void Evt_Display::sendDrawGUI(GBuffer& gBuffer) {
 	}
 }
 
+void Evt_Display::sendDraw3DGUI(GBuffer& gBuffer) {
+	for (unsigned int i = 0; i < listeners.size(); i++) {
+		listeners[i]->onDraw3DGUI(gBuffer);
+	}
+}
+
 void Evt_Display::sendDrawGeometry(GBuffer& gBuffer) {
 	for (unsigned int i = 0; i < listeners.size(); i++) {
 		listeners[i]->onDrawGeometry(gBuffer);

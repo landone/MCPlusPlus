@@ -11,6 +11,7 @@
 #include "Graphic.h"
 #include "Text.h"
 #include "MDL_Human.h"
+#include "ItemStack.h"
 
 int main() {
 	
@@ -31,11 +32,7 @@ int main() {
 
 	long lastFrame = clock(), thisFrame = 0;
 
-	//player.setPos(2, 26.5, 2.5);
-	player.setPos(0, 0, 0);
-	cam->setRot(glm::vec3());
-
-	world.getBlockAt(2,4,2)->setMaterial(MATERIAL::BRICK);
+	player.setPos(2, 26.5, 2.5);
 
 	double fps = 0;
 	int fpsCounter = 0;
@@ -59,9 +56,6 @@ int main() {
 	coot.setPos(glm::vec3(5.5, 25, 5.5));
 	human.setTex(GameAssetLoader::getEntity(ENT_HUMAN));
 	human.setPos(glm::vec3(6.5, 25, 5.5));
-
-	Mesh mesh = GameAssetLoader::getItemMesh(ITEM::DIAMOND);
-	Texture tex = GameAssetLoader::getItemTex(ITEM::DIAMOND);
 
 	while (disp.isOpen()) {
 
@@ -96,14 +90,11 @@ int main() {
 		disp.gBuffer.setViewMat(cam->getViewMatrix());
 		Evt_Display::sendDrawGeometry(disp.gBuffer);
 
-		disp.gBuffer.setTransMat(glm::mat4());
-		disp.gBuffer.setRotMat(glm::mat4());
-		tex.bind();
-		mesh.draw();
-
-		//disp.gBuffer.setViewMat(guiCam->getViewMatrix());
-		disp.gBuffer.setGUI(true);
+		disp.gBuffer.setViewMat(guiCam->getViewMatrix());
 		glDisable(GL_DEPTH_TEST);
+		Evt_Display::sendDraw3DGUI(disp.gBuffer);
+		disp.gBuffer.setGUI(true);
+		disp.gBuffer.setViewMat(glm::mat4());
 		Evt_Display::sendDrawGUI(disp.gBuffer);
 		glEnable(GL_DEPTH_TEST);
 		disp.gBuffer.setGUI(false);
