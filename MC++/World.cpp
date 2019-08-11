@@ -1,4 +1,5 @@
 #include "World.h"
+#include <iostream>
 
 World::World() {
 
@@ -85,14 +86,18 @@ void World::updateVisibility(Block* block) {
 
 }
 
-Block* World::traceRay(glm::vec3 pos, glm::vec3 dir, float reach, bool prev, glm::vec3* result) {
+Block* World::traceRay(glm::vec3 pos, glm::vec3 dir, float reach, bool prev, glm::vec3* result, glm::vec3* axis) {
 	glm::vec3 origin = pos;
 	Block* prevBlock = nullptr;
+	glm::vec3 normal(0,0,0);
 	while(glm::distance(origin, pos) <= reach) {
 		Block* block = getBlockAt(pos);
 		if (block && block->getMaterial() != AIR) {
 			if (result) {
 				(*result) = pos;
+			}
+			if (axis) {
+				(*axis) = normal;
 			}
 			return prev ? prevBlock : block;
 		}
@@ -112,9 +117,9 @@ Block* World::traceRay(glm::vec3 pos, glm::vec3 dir, float reach, bool prev, glm
 		dist[2] = dir[2] > 0 ? dist[2] + 1.0f : (approx[2] ? dist[2] - 1.0f : dist[2]);
 		dist[2] -= pos[2];
 		float ratios[3];
-		ratios[0] = dist[0] / dir[0];
-		ratios[1] = dist[1] / dir[1];
-		ratios[2] = dist[2] / dir[2];
+		ratios[0] = dir[0] == 0.0f ? INFINITY : dist[0] / dir[0];
+		ratios[1] = dir[1] == 0.0f ? INFINITY : dist[1] / dir[1];
+		ratios[2] = dir[2] == 0.0f ? INFINITY : dist[2] / dir[2];
 		if (ratios[0] < ratios[1] && ratios[0] < ratios[2]) {
 			pos[0] += dist[0];
 			pos[1] += ratios[0] * dir[1];
@@ -122,14 +127,16 @@ Block* World::traceRay(glm::vec3 pos, glm::vec3 dir, float reach, bool prev, glm
 			if (dir[0] <= 0 && !approx[0]) {
 				pos[0] -= 0.0001f;
 			}
+			normal = glm::vec3(dir[0] > 0.0f ? -1.0f : 1.0f, 0, 0);
 		}
-		else if (ratios[1] < ratios[2] && ratios[1] < ratios[0]) {
+		else if (ratios[1] < ratios[2]) {
 			pos[1] += dist[1];
 			pos[0] += ratios[1] * dir[0];
 			pos[2] += ratios[1] * dir[2];
 			if (dir[1] <= 0 && !approx[1]) {
 				pos[1] -= 0.0001f;
 			}
+			normal = glm::vec3(0, dir[1] > 0.0f ? -1.0f : 1.0f, 0);
 		}
 		else {
 			pos[2] += dist[2];
@@ -138,6 +145,7 @@ Block* World::traceRay(glm::vec3 pos, glm::vec3 dir, float reach, bool prev, glm
 			if (dir[2] < 0 && !approx[2]) {
 				pos[2] -= 0.0001f;
 			}
+			normal = glm::vec3(0, 0, dir[2] > 0.0f ? -1.0f : 1.0f);
 		}
 	}
 

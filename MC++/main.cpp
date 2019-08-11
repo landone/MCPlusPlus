@@ -25,6 +25,8 @@ int main() {
 	GameAssetLoader::loadAll();
 
 	World world;
+	world.getBlockAt(2, 25, 4)->setMaterial(MATERIAL::BEDROCK);
+	world.updateVisibility(world.getBlockAt(2, 25, 4));
 
 	Player player(world);
 	Camera* cam = player.getCamera();
@@ -32,7 +34,7 @@ int main() {
 
 	long lastFrame = clock(), thisFrame = 0;
 
-	player.setPos(2, 26.5, 2.5);
+	player.setPos(2.5, 25.3, 2.5);
 
 	double fps = 0;
 	int fpsCounter = 0;
@@ -43,13 +45,6 @@ int main() {
 	Graphic crosshair(GameAssetLoader::getGUI(GUI_CROSSHAIR));
 	Graphic hotbar(GameAssetLoader::getGUI(GUI_HOTBAR));
 	hotbar.trans.SetPos(glm::vec3(hotbar.trans.GetPos().x, -1, 0));
-	Text text("Bottom Text");
-	Text thanos("THANOS TEXT");
-	thanos.setSize(0.12);
-	thanos.setColor(glm::vec3(0.6, 0.4, 1));
-	thanos.getGraphic().trans.SetPos(glm::vec3(-1, -1 + 0.12, 0));
-	text.setSize(0.12);
-	text.setColor(glm::vec3(1, 1, 0));
 
 	MDL_Human coot, human;
 	coot.setTex(GameAssetLoader::getEntity(ENT_HUMAN_COOT));

@@ -13,12 +13,14 @@ public:
 
 	void setType(ITEM);
 	void setMaterial(MATERIAL);
+	void setName(std::string);
 	void setAmount(int);
 	void setPhysical(bool);
 	void setGUI(bool);
 
 	ITEM getType() { return item_type; }
 	MATERIAL getMaterial() { return mat_type; }
+	std::string getName() { return name; }
 	int getAmount() { return amount; }
 	bool isPhysical() { return isWorld; }
 	bool isGUI() { return gui; }
@@ -37,6 +39,7 @@ private:
 	bool gui = false;
 	bool is_block = false;
 	Block* block = nullptr;
+	std::string name;
 
 	Transform trans;
 	Transform trans_gui;

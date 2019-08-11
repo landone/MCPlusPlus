@@ -87,6 +87,6 @@ void Text::createTexture() {
 
 	graphic.setTexture(tex);
 	graphic.trans.SetPos(glm::vec3(-1, -1, 0));
-	setSize(graphic.trans.GetScale().y);
+	setSize(graphic.trans.GetScale().y * 2);
 
 }

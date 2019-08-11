@@ -35,6 +35,7 @@ void ItemStack::setType(ITEM i) {
 
 	is_block = false;
 	item_type = i;
+	setName(Items::getName(i));
 	if (block) {
 		delete block;
 		block = nullptr;
@@ -50,6 +51,7 @@ void ItemStack::setMaterial(MATERIAL m) {
 
 	is_block = true;
 	mat_type = m;
+	setName(Material::getName(m));
 	if (!block) {
 		block = new Block(m);
 	}
@@ -58,6 +60,12 @@ void ItemStack::setMaterial(MATERIAL m) {
 	}
 	block->getTrans() = gui ? trans_gui : trans;
 	block->setAllVisible();
+
+}
+
+void ItemStack::setName(std::string str) {
+
+	name = str;
 
 }
 
