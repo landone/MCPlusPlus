@@ -25,7 +25,7 @@ int main() {
 	GameAssetLoader::loadAll();
 
 	World world;
-	world.getBlockAt(2, 25, 4)->setMaterial(MATERIAL::BEDROCK);
+	world.getBlockAt(2, 25, 4)->setMaterial(MATERIAL::LOG_OAK);
 	world.updateVisibility(world.getBlockAt(2, 25, 4));
 
 	Player player(world);
@@ -34,7 +34,7 @@ int main() {
 
 	long lastFrame = clock(), thisFrame = 0;
 
-	player.setPos(2.5, 25.3, 2.5);
+	player.setPos(2.5, 25.5, 2.5);
 
 	double fps = 0;
 	int fpsCounter = 0;

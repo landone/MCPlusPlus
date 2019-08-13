@@ -12,20 +12,12 @@ ItemStack::ItemStack(ITEM i, int amt) {
 
 ItemStack::ItemStack(MATERIAL m, int amt) {
 
+
 	trans_gui.SetPos(glm::vec3(-0.64, -0.55, 0.6));
 	trans_gui.SetRot(glm::vec3(3.1415f / 3.0f, -3.1415f / 3.0f, -3.1415f / 3.0f));
 
 	setMaterial(m);
 	setAmount(amt);
-
-}
-
-ItemStack::~ItemStack() {
-
-	if (block) {
-		delete block;
-		block = nullptr;
-	}
 
 }
 
@@ -36,12 +28,8 @@ void ItemStack::setType(ITEM i) {
 	is_block = false;
 	item_type = i;
 	setName(Items::getName(i));
-	if (block) {
-		delete block;
-		block = nullptr;
-	}
-	mesh = GameAssetLoader::getItemMesh(i);
-	tex = GameAssetLoader::getItemTex(i);
+	mesh = &GameAssetLoader::getItemMesh(i);
+	tex = &GameAssetLoader::getItemTex(i);
 
 }
 
@@ -52,14 +40,9 @@ void ItemStack::setMaterial(MATERIAL m) {
 	is_block = true;
 	mat_type = m;
 	setName(Material::getName(m));
-	if (!block) {
-		block = new Block(m);
-	}
-	else {
-		block->setMaterial(m);
-	}
-	block->getTrans() = gui ? trans_gui : trans;
-	block->setAllVisible();
+	block.setMaterial(m);
+	block.getTrans() = gui ? trans_gui : trans;
+	block.setAllVisible();
 
 }
 
@@ -85,7 +68,7 @@ void ItemStack::setGUI(bool toggle) {
 	
 	gui = toggle;
 	if (is_block) {
-		block->getTrans() = gui ? trans_gui : trans;
+		block.getTrans() = gui ? trans_gui : trans;
 	}
 
 }
@@ -93,10 +76,10 @@ void ItemStack::setGUI(bool toggle) {
 Transform& ItemStack::getTrans() {
 
 	if (is_block) {
-		return block->getTrans();
+		return block.getTrans();
 	}
 
-	return trans;
+	return gui ? trans_gui : trans;
 
 }
 
@@ -104,13 +87,13 @@ void ItemStack::onDrawGeometry(GBuffer& gBuf) {
 
 	if (isWorld && !gui) {
 		if (is_block) {
-			block->draw(gBuf);
+			block.draw(gBuf);
 		}
 		else {
 			gBuf.setTransMat(trans.GetMatrix());
 			gBuf.setRotMat(trans.GetRotMatrix());
-			tex.bind();
-			mesh.draw();
+			tex->bind();
+			mesh->draw();
 		}
 	}
 
@@ -120,13 +103,13 @@ void ItemStack::onDraw3DGUI(GBuffer& gBuf) {
 
 	if (isWorld && gui) {
 		if (is_block) {
-			block->draw(gBuf);
+			block.draw(gBuf);
 		}
 		else {
 			gBuf.setTransMat(trans_gui.GetMatrix());
 			gBuf.setRotMat(trans_gui.GetRotMatrix());
-			tex.bind();
-			mesh.draw();
+			tex->bind();
+			mesh->draw();
 		}
 	}
 

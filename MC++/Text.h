@@ -12,7 +12,7 @@ enum FONT {
 class Text {
 public:
 
-	Text(std::string);
+	Text(std::string = "");
 
 	void setColor(glm::vec3);
 	void setString(std::string);

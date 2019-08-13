@@ -9,7 +9,6 @@ public:
 
 	ItemStack(ITEM = ITEM::NOTHING, int = 1);
 	ItemStack(MATERIAL, int = 1);
-	~ItemStack();
 
 	void setType(ITEM);
 	void setMaterial(MATERIAL);
@@ -38,12 +37,12 @@ private:
 	bool isWorld = false;
 	bool gui = false;
 	bool is_block = false;
-	Block* block = nullptr;
+	Block block;
 	std::string name;
 
 	Transform trans;
 	Transform trans_gui;
-	Mesh mesh;
-	Texture tex;
+	Mesh* mesh = nullptr;
+	Texture* tex = nullptr;
 
 };

@@ -68,18 +68,19 @@ void Text::createTexture() {
 	Transform trans;
 	GLint dims[4] = { 0 };
 	glGetIntegerv(GL_VIEWPORT, dims);
-	trans.SetScale(glm::vec3((1.0f / len)* width / dims[2], 1.0f * height / dims[3], 1));
-	for (int i = 0; i < len; i++) {
+	if (len > 0) {
+		trans.SetScale(glm::vec3((1.0f / len) * width / dims[2], 1.0f * height / dims[3], 1));
+		for (int i = 0; i < len; i++) {
 
-		trans.SetPos(glm::vec3((-1.0f + i * 2.0f / len+ 1) / dims[2] * width - 1,-1,0));
-		shaderef.setTransMat(trans.GetMatrix());
-		char c = text.at(i);
-		glm::vec2 bottomLeft((c % 16) / 16.0f, (c / 16 + 1) / 16.0f);
-		mesh.setQuadTextureCoord(bottomLeft, bottomLeft + glm::vec2(1/16.0f, -1/16.0f));
-		mesh.draw();
+			trans.SetPos(glm::vec3((-1.0f + i * 2.0f / len + 1) / dims[2] * width - 1, -1, 0));
+			shaderef.setTransMat(trans.GetMatrix());
+			char c = text.at(i);
+			glm::vec2 bottomLeft((c % 16) / 16.0f, (c / 16 + 1) / 16.0f);
+			mesh.setQuadTextureCoord(bottomLeft, bottomLeft + glm::vec2(1 / 16.0f, -1 / 16.0f));
+			mesh.draw();
 
+		}
 	}
-
 	mesh.setQuadTextureCoord(glm::vec2(0, 0), glm::vec2(1, 1));
 	//tex = shaderef.getTex();
 
