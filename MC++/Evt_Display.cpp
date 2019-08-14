@@ -1,10 +1,15 @@
 #include "Evt_Display.h"
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 static std::vector<DisplayListener*> listeners;
 
 DisplayListener::DisplayListener() {
+	listeners.push_back(this);
+}
+
+DisplayListener::DisplayListener(const DisplayListener& t) {
 	listeners.push_back(this);
 }
 

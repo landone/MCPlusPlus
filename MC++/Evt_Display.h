@@ -6,6 +6,7 @@ class DisplayListener {
 public:
 
 	DisplayListener();
+	DisplayListener(const DisplayListener&);
 	~DisplayListener();
 
 	virtual void onFrame(double delta) {}

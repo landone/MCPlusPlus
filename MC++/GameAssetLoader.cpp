@@ -185,7 +185,7 @@ Texture GameAssetLoader::crop(BasicShader& shader, Transform& trans, Texture& ba
 	float width = abs(topRight.x - bottomLeft.x);
 	float height = abs(topRight.y - bottomLeft.y);
 	tex.setIndex(shader.createTex());
-	shader.updateDimensions(width, height);
+	shader.updateDimensions((int)width, (int)height);
 	trans.SetScale(glm::vec3(width / dim.x, height / dim.y, 1));
 	shader.setTransMat(trans.GetMatrix());
 	base.bind();
@@ -198,8 +198,8 @@ Texture GameAssetLoader::crop(BasicShader& shader, Transform& trans, Texture& ba
 	quad.setQuadTextureCoord(bottomLeft, topRight);
 	quad.draw();
 
-	tex.setWidth(width);
-	tex.setHeight(height);
+	tex.setWidth((int)width);
+	tex.setHeight((int)height);
 
 	glDeleteFramebuffers(1, &buf);
 

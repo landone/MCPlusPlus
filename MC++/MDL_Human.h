@@ -15,6 +15,7 @@ public:
 	void setArmRotation(glm::vec3 rot, bool right);
 	void setLegRotation(glm::vec3 rot, bool right);
 	void setBodyRotation(glm::vec3);
+	void setVisible(bool set) { visible = set; }
 
 	void onDrawGeometry(GBuffer&) override;
 
@@ -31,4 +32,5 @@ private:
 	glm::vec3 rots[6];
 	Transform trans[6];
 	Texture tex;
+	bool visible = true;
 };

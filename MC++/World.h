@@ -1,12 +1,14 @@
 #pragma once
 
 #include "Chunk.h"
-#include <iostream>
+#include "ItemStack.h"
 
-class World {
+class World : private DisplayListener {
 public:
 
 	World();
+
+	void spawnItem(MATERIAL stack, glm::vec3 pos);
 
 	Block* getBlockAt(glm::vec3 pos) { return getBlockAt((int)floor(pos.x), (int)floor(pos.y), (int)floor(pos.z)); };
 	Block* getBlockAt(int x, int y, int z);
@@ -19,6 +21,14 @@ public:
 private:
 	static const int CHUNK_RENDER_RADIUS = 2;
 	static const int CHUNK_RENDER_DIAMETER = CHUNK_RENDER_RADIUS * 2 - 1;
+
+	struct ItemDrop {
+		ItemStack s;
+		glm::vec3 v;//Velocity
+	};
+	std::vector<ItemDrop*> itemDrops;
+
+	void onFrame(double delta) override;
 
 	//Array of visible chunks
 	Chunk chunks[CHUNK_RENDER_DIAMETER][CHUNK_RENDER_DIAMETER];

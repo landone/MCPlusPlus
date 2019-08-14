@@ -56,12 +56,12 @@ void Text::createTexture() {
 	shaderef.setBuffer(buf);
 	shaderef.setGLTex(tex.getIndex());
 	int len = text.length();
-	float width = font.getWidth() / 16 * len;
-	float height = font.getHeight() / 16;
-	tex.setWidth(width);
-	tex.setHeight(height);
+	float width = (float) font.getWidth() / 16 * len;
+	float height = (float) font.getHeight() / 16;
+	tex.setWidth((int)width);
+	tex.setHeight((int)height);
 	/* Assume ascii 16*16 character map*/
-	shaderef.updateDimensions(width, height);
+	shaderef.updateDimensions((int)width, (int)height);
 	shaderef.setTint(color);
 	font.bind();
 	Mesh& mesh = *Graphic::getQuadMesh();

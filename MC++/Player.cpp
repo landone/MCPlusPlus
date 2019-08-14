@@ -12,8 +12,9 @@ Player::Player(World& wrld) : world(wrld), inven(9) {
 
 	if (text == nullptr) {
 		text = new Text();
-		text->setSize(0.08);
+		text->setSize(0.08f);
 		text->setColor(glm::vec3(1, 1, 0));
+		//text->getGraphic().trans.SetPos(glm::vec3(500, 0.4, 0));
 	}
 
 	for (int i = 1; i < ITEM::MAX_ITEM; i++) {
@@ -37,9 +38,9 @@ Player::~Player() {
 void Player::setHand(int index) {
 
 	ItemStack& pastItem = inven.getItem(handIndex);
+	pastItem.getTrans().SetPos(handPos);
 	pastItem.setPhysical(false);
 	pastItem.setGUI(false);
-	pastItem.getTrans().SetPos(handPos);
 	ItemStack& item = inven.getItem(index);
 	if ((item.isBlock() && item.getMaterial() != MATERIAL::AIR) ||
 		(!item.isBlock() && item.getType() != ITEM::NOTHING)) { //Make visible if real
@@ -50,36 +51,38 @@ void Player::setHand(int index) {
 
 	handPos = item.getTrans().GetPos();
 	text->setString(item.getName());
+	text->getGraphic().trans.SetPos(glm::vec3(-text->getGraphic().trans.GetScale().x, -0.8, 0));
 
 }
 
 void Player::onMousePress(int button, int x, int y) {
 
-	glm::vec3 myPos = getPos();
+	glm::vec3 headPos = m_position + glm::vec3(0, height, 0);
 	glm::vec3 pos;
-	Block* block = world.traceRay(myPos, cam->getForward(), 5, button == 2, &pos);
-	if (block) {
-		if (button == 0) {//Left click
-			block->setMaterial(MATERIAL::AIR);
-			world.updateVisibility(block);
+	Block* block = world.traceRay(headPos, cam->getForward(), 5, button == 2, &pos);
+	if (button == 0 && block) {//Left click
+		if (block->getMaterial() != MATERIAL::AIR) {
+			world.spawnItem(block->getMaterial(), block->getPosition());
 		}
-		else if (button == 2) {//Right click
-			ItemStack& hand = inven.getItem(handIndex);
-			if (!hand.isBlock() || hand.getMaterial() == MATERIAL::AIR) {
-				return;
-			}
-			glm::vec3 bPos = block->getPosition();
-			//Check for attempt to place block on self
-			if (button == 2 && bPos.x == floorf(myPos.x) && bPos.z == floorf(myPos.z) &&
-				(bPos.y == floorf(myPos.y) || bPos.y == floorf(myPos.y - 1))) {
-				return;
-			}
-			block->setMaterial(hand.getMaterial());
-			world.updateVisibility(block);
+		block->setMaterial(MATERIAL::AIR);
+		world.updateVisibility(block);
+	}
+	else if (button == 2 && block) {//Right click
+		ItemStack& hand = inven.getItem(handIndex);
+		if (!hand.isBlock() || hand.getMaterial() == MATERIAL::AIR) {
+			return;
 		}
-		else if (button == 1) {//Middle click
-			setPos(pos + glm::vec3(0, 2, 0));
+		glm::vec3 bPos = block->getPosition();
+		//Check for attempt to place block on self
+		if (button == 2 && bPos.x == floorf(headPos.x) && bPos.z == floorf(headPos.z) &&
+			(bPos.y == floorf(headPos.y) || bPos.y == floorf(headPos.y - 1))) {
+			return;
 		}
+		block->setMaterial(hand.getMaterial());
+		world.updateVisibility(block);
+	}
+	else if (button == 1) {//Middle click
+		thirdperson(!isThirdperson);
 	}
 }
 
@@ -96,6 +99,15 @@ void Player::onMouseMotion(double x, double y) {
 }
 
 void Player::onFrame(double delta) {
+
+	if (isThirdperson) {
+		model.setArmRotation(glm::vec3(sin(walkCounter*2)*0.4f, 0, 0), false);
+		model.setArmRotation(glm::vec3(-sin(walkCounter * 2)*0.4f, 0, 0), true);
+		model.setLegRotation(glm::vec3(-sin(walkCounter * 2)*0.4f, 0, 0), false);
+		model.setLegRotation(glm::vec3(sin(walkCounter * 2)*0.4f, 0, 0), true);
+		model.setHeadRotation(glm::vec3(-cam->getRot().x, 0, 0));
+		model.setBodyRotation(glm::vec3(0, cam->getRot().y + 3.1415f, 0));
+	}
 
 	int forMul = Evt_Keyboard::isKeyDown(KEY_W) ? 1 : (Evt_Keyboard::isKeyDown(KEY_S) ? -1 : 0);
 	int rightMul = Evt_Keyboard::isKeyDown(KEY_D) ? 1 : (Evt_Keyboard::isKeyDown(KEY_A) ? -1 : 0);
@@ -142,13 +154,13 @@ void Player::onFrame(double delta) {
 
 	}
 	else {
-		velocity.y -= gravity * delta;
+		velocity.y -= gravity * (float)delta;
 	}
 
 
 	floorBlock = nullptr; //Reset
 
-	glm::vec3 pos = cam->getPos() - glm::vec3(0,height,0);
+	glm::vec3 pos = getPos();
 	glm::vec3 point, axis;
 	bool checkAgain = true;
 	std::vector<glm::vec3> collisions;
@@ -172,7 +184,7 @@ void Player::onFrame(double delta) {
 	if (collisions.size() > 0) {
 		glm::vec3 closest;
 		float distance = INFINITY;
-		for (int i = 0; i < collisions.size(); i++) {
+		for (unsigned int i = 0; i < collisions.size(); i++) {
 			if (glm::distance(pos, collisions[i]) < distance) {
 				distance = glm::distance(pos, collisions[i]);
 				closest = collisions[i];
@@ -184,6 +196,28 @@ void Player::onFrame(double delta) {
 
 	}
 
-	cam->move(velocity);
+	move(velocity);
 
+}
+
+void Player::setPos(glm::vec3 pos) {
+
+	m_position = pos;
+	cam->setPos(m_position + glm::vec3(0, height, 0));
+	if (isThirdperson) {
+		model.setPos(pos - glm::vec3(0, width, 0));
+	}
+
+}
+
+void Player::thirdperson(bool set) {
+	isThirdperson = set;
+	model.setVisible(set);
+	if (set) {
+		cam->setOffset(thirdpersonDistance);
+		model.setPos(m_position - glm::vec3(0, width, 0));
+	}
+	else {
+		cam->setOffset(0.0f);
+	}
 }

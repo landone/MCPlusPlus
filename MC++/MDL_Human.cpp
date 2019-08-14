@@ -214,10 +214,10 @@ MDL_Human::MDL_Human() {
 		for (int i = 0; i < 6; i++) {
 			meshes[i].Init(verts[i], indices);
 		}
-		tex = GameAssetLoader::getEntity(ENT_HUMAN);
 
 	}
 
+	tex = GameAssetLoader::getEntity(ENT_HUMAN);
 	setPos(vec3(0,0,0));
 
 }
@@ -264,6 +264,9 @@ void MDL_Human::setBodyRotation(vec3 rot) {
 
 void MDL_Human::onDrawGeometry(GBuffer& gBuf) {
 
+	if (!visible) {
+		return;
+	}
 	tex.bind();
 	for (int i = 0; i < 6; i++) {
 		gBuf.setTransMat(trans[i].GetMatrix());

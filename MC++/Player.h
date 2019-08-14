@@ -5,6 +5,7 @@
 #include "Evt_Display.h"
 #include "Block.h"
 #include "Inventory.h"
+#include "MDL_Human.h"
 
 class World;
 
@@ -15,11 +16,13 @@ public:
 	~Player();
 
 	void setPos(float x, float y, float z) { setPos(glm::vec3(x, y, z)); }
-	void setPos(glm::vec3 pos) { cam->setPos(pos + glm::vec3(0,height,0)); }
+	void setPos(glm::vec3 pos);
+	void move(float x, float y, float z) { move(glm::vec3(x, y, z)); }
+	void move(glm::vec3 amt) { setPos(getPos() + amt); }
 	void setHand(int index);
-	void move(glm::vec3 amt) { cam->move(amt); }
+	void thirdperson(bool set);
 
-	glm::vec3 getPos() { return cam->getPos(); }
+	glm::vec3 getPos() { return m_position; }
 	Camera* getCamera() { return cam; }
 
 private:
@@ -30,6 +33,11 @@ private:
 	void onFrame(double delta) override;
 
 	Camera* cam = Camera::create();
+	bool isThirdperson = false;
+	float thirdpersonDistance = 3.0f;
+	MDL_Human model;
+	
+	glm::vec3 m_position;
 	World& world;
 
 	Inventory inven;

@@ -14,7 +14,7 @@ Inventory::Inventory(std::vector<ItemStack> items) {
 
 ItemStack& Inventory::getItem(int index) {
 
-	if (index < 0 || index >= items.size()) {
+	if (index < 0 || index >= (int)items.size()) {
 		index = 0;
 	}
 
@@ -24,7 +24,7 @@ ItemStack& Inventory::getItem(int index) {
 
 void Inventory::setItem(int index, ITEM item) {
 
-	if (index < 0 || index >= items.size()) {
+	if (index < 0 || index >= (int)items.size()) {
 		return;
 	}
 
@@ -34,7 +34,7 @@ void Inventory::setItem(int index, ITEM item) {
 
 void Inventory::setItem(int index, MATERIAL mat) {
 
-	if (index < 0 || index >= items.size()) {
+	if (index < 0 || index >= (int)items.size()) {
 		return;
 	}
 
@@ -56,7 +56,7 @@ void Inventory::empty() {
 
 	ItemStack blank;
 
-	for (int i = 0; i < items.size(); i++) {
+	for (unsigned int i = 0; i < items.size(); i++) {
 		items[i] = blank;
 	}
 

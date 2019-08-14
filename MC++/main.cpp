@@ -35,6 +35,7 @@ int main() {
 	long lastFrame = clock(), thisFrame = 0;
 
 	player.setPos(2.5, 25.5, 2.5);
+	player.thirdperson(true);
 
 	double fps = 0;
 	int fpsCounter = 0;
@@ -49,21 +50,11 @@ int main() {
 	MDL_Human coot, human;
 	coot.setTex(GameAssetLoader::getEntity(ENT_HUMAN_COOT));
 	coot.setPos(glm::vec3(5.5, 25, 5.5));
-	human.setTex(GameAssetLoader::getEntity(ENT_HUMAN));
 	human.setPos(glm::vec3(6.5, 25, 5.5));
 
 	while (disp.isOpen()) {
 
 		counter += 0.05f;
-
-		coot.setBodyRotation(glm::vec3(0, counter, 0));
-		coot.setArmRotation(glm::vec3(counter / 2, 0, 0), false);
-		coot.setArmRotation(glm::vec3(counter / 2, 0, 0), true);
-		coot.setLegRotation(glm::vec3(cos(counter), 0, 0), false);
-		coot.setLegRotation(glm::vec3(cos(counter + 3.1415f), 0, 0), true);
-		coot.setBodyRotation(glm::vec3(counter / 2, 0, 0));
-		coot.setPos(glm::vec3(5.5+sin(counter)*3, 25, 5.5 + cos(counter)*3));
-		human.setHeadRotation(glm::vec3(sin(counter), 0, 0));
 
 		thisFrame = clock();
 		Evt_Display::sendFrame((thisFrame - lastFrame) / 1000.0);

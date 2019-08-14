@@ -2,7 +2,7 @@
 #include <iostream>
 
 World::World() {
-
+	itemDrops.reserve(5);
 	for (int x = 0; x < CHUNK_RENDER_DIAMETER; x++) {
 		for (int z = 0; z < CHUNK_RENDER_DIAMETER; z++) {
 
@@ -17,6 +17,26 @@ World::World() {
 			chunks[x][z].updateAllVisibility(*this);
 
 		}
+	}
+
+}
+
+void World::spawnItem(MATERIAL m, glm::vec3 pos) {
+	
+	itemDrops.push_back(new ItemDrop());
+	ItemStack& stack = itemDrops[itemDrops.size() - 1]->s;
+	stack.setMaterial(m);
+	stack.setPhysical(true);
+	stack.setGUI(false);
+	stack.getTrans().SetScale(glm::vec3(0.4, 0.4, 0.4));
+	stack.getTrans().SetPos(pos + glm::vec3(0.5, 0.3, 0.5));
+
+}
+
+void World::onFrame(double delta) {
+
+	for (unsigned int i = 0; i < itemDrops.size(); i++) {
+		itemDrops[i]->s.getTrans().rotate(glm::vec3(0, 0.05f, 0));
 	}
 
 }
