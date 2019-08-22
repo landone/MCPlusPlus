@@ -21,6 +21,15 @@ ItemStack::ItemStack(MATERIAL m, int amt) {
 
 }
 
+Texture& ItemStack::getTexture() {
+
+	if (isBlock()) {
+		return GameAssetLoader::getMaterial(mat_type);
+	}
+	return GameAssetLoader::getItemTex(item_type);
+
+}
+
 void ItemStack::setType(ITEM i) {
 
 	trans_gui.SetScale(glm::vec3(1.2, 1.2, 1.2));
@@ -35,12 +44,13 @@ void ItemStack::setType(ITEM i) {
 
 void ItemStack::setMaterial(MATERIAL m) {
 
-	trans_gui.SetScale(glm::vec3(0.4, 0.4, 0.4));
+	trans_gui.SetScale(glm::vec3(0.4f, 0.4f, 0.4f));//Default block gui scale
 
 	is_block = true;
 	mat_type = m;
 	setName(Material::getName(m));
 	block.setMaterial(m);
+	trans.SetScale(glm::vec3(0.3f, 0.3f, 0.3f));//Default block item scale
 	block.getTrans() = gui ? trans_gui : trans;
 	block.setAllVisible();
 
@@ -80,6 +90,16 @@ Transform& ItemStack::getTrans() {
 	}
 
 	return gui ? trans_gui : trans;
+
+}
+
+bool ItemStack::isNothing() {
+
+	if (isBlock()) {
+		return getMaterial() == MATERIAL::AIR;
+	}
+
+	return getType() == ITEM::NOTHING;
 
 }
 

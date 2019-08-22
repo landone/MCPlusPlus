@@ -32,20 +32,15 @@ int main() {
 	Camera* cam = player.getCamera();
 	Camera* guiCam = Camera::create();
 
-	long lastFrame = clock(), thisFrame = 0;
+	double lastFrame = clock(), thisFrame = 0;
 
 	player.setPos(2.5, 25.5, 2.5);
-	player.thirdperson(true);
 
 	double fps = 0;
 	int fpsCounter = 0;
 	bool printFPS = true;
 
 	float counter = 0.0f;
-
-	Graphic crosshair(GameAssetLoader::getGUI(GUI_CROSSHAIR));
-	Graphic hotbar(GameAssetLoader::getGUI(GUI_HOTBAR));
-	hotbar.trans.SetPos(glm::vec3(hotbar.trans.GetPos().x, -1, 0));
 
 	MDL_Human coot, human;
 	coot.setTex(GameAssetLoader::getEntity(ENT_HUMAN_COOT));

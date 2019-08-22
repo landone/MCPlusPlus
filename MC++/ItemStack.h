@@ -20,10 +20,12 @@ public:
 	ITEM getType() { return item_type; }
 	MATERIAL getMaterial() { return mat_type; }
 	std::string getName() { return name; }
+	Texture& getTexture();
 	int getAmount() { return amount; }
 	bool isPhysical() { return isWorld; }
 	bool isGUI() { return gui; }
 	bool isBlock() { return is_block; }
+	bool isNothing();
 	Transform& getTrans();
 
 	void onDrawGeometry(GBuffer&) override;

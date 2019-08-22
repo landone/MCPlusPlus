@@ -8,8 +8,12 @@
 
 static Text* text = nullptr;
 
-Player::Player(World& wrld) : world(wrld), inven(9) {
+Player::Player(World& wrld) : world(wrld), inven(9), crosshair(GameAssetLoader::getGUI(GUI_CROSSHAIR)),
+hotbar(GameAssetLoader::getGUI(GUI_HOTBAR)), hotbarSelect(GameAssetLoader::getGUI(GUI_HOTBAR_SELECT)) {
 
+	hotbar.trans.SetPos(glm::vec3(hotbar.trans.GetPos().x, -1, 0));
+	hotbarSelect.trans.SetPos(hotbar.trans.GetPos());
+	
 	if (text == nullptr) {
 		text = new Text();
 		text->setSize(0.08f);
@@ -37,6 +41,14 @@ Player::~Player() {
 
 void Player::setHand(int index) {
 
+	if (index < 0 || index >= 9) {//Hotbar limits
+		return;
+	}
+
+	glm::vec3 selectPos = hotbar.trans.GetPos();
+	selectPos.x += index * hotbar.trans.GetScale().x * 2 / 9.0f;
+	hotbarSelect.trans.SetPos(selectPos);
+
 	ItemStack& pastItem = inven.getItem(handIndex);
 	pastItem.getTrans().SetPos(handPos);
 	pastItem.setPhysical(false);
@@ -45,13 +57,13 @@ void Player::setHand(int index) {
 	if ((item.isBlock() && item.getMaterial() != MATERIAL::AIR) ||
 		(!item.isBlock() && item.getType() != ITEM::NOTHING)) { //Make visible if real
 		item.setPhysical(true);
-		item.setGUI(true);
+		item.setGUI(viewMode == VIEW_MODE::FIRST_PERSON);
 	}
 	handIndex = index;
 
 	handPos = item.getTrans().GetPos();
-	text->setString(item.getName());
-	text->getGraphic().trans.SetPos(glm::vec3(-text->getGraphic().trans.GetScale().x, -0.8, 0));
+	//text->setString(item.getName());
+	//text->getGraphic().trans.SetPos(glm::vec3(-text->getGraphic().trans.GetScale().x, -0.8, 0));
 
 }
 
@@ -82,13 +94,32 @@ void Player::onMousePress(int button, int x, int y) {
 		world.updateVisibility(block);
 	}
 	else if (button == 1) {//Middle click
-		thirdperson(!isThirdperson);
+		setViewMode(viewMode == VIEW_MODE::FIRST_PERSON ? VIEW_MODE::THIRD_PERSON : 
+			(viewMode == VIEW_MODE::THIRD_PERSON ? VIEW_MODE::THIRD_PERSON_FRONT : VIEW_MODE::FIRST_PERSON));
 	}
+}
+
+void Player::onDrawGUI(GBuffer& gBuffer) {
+
+	Mesh& mesh = (*Graphic::getQuadMesh());
+	Transform trans;
+	glm::vec3 hotScale = hotbar.trans.GetScale();
+	trans.SetScale(glm::vec3(hotScale.x / 9.0f, hotScale.y, 1.0f));
+	gBuffer.setRotMat(trans.GetRotMatrix());//Set rot to identity
+	for (int i = 0; i < 9; i++) {
+		if (!inven.getItem(i).isNothing()) {
+			trans.SetPos(hotbar.trans.GetPos() + glm::vec3(i * hotScale.x * 2 / 9.0f, 0, 0));
+			gBuffer.setTransMat(trans.GetMatrix());
+			inven.getItem(i).getTexture().bind();
+			mesh.draw();
+		}
+	}
+
 }
 
 void Player::onMouseWheel(double amt) {
 
-	setHand((handIndex + (amt > 0 ? 1 : inven.size() - 1)) % inven.size());
+	setHand((handIndex + (amt > 0 ? inven.size() - 1 : 1)) % inven.size());
 
 }
 
@@ -100,24 +131,32 @@ void Player::onMouseMotion(double x, double y) {
 
 void Player::onFrame(double delta) {
 
-	if (isThirdperson) {
+	ItemStack& item = inven.getItem(handIndex);
+	if (viewMode != VIEW_MODE::FIRST_PERSON) { //Model rotations
 		model.setArmRotation(glm::vec3(sin(walkCounter*2)*0.4f, 0, 0), false);
 		model.setArmRotation(glm::vec3(-sin(walkCounter * 2)*0.4f, 0, 0), true);
 		model.setLegRotation(glm::vec3(-sin(walkCounter * 2)*0.4f, 0, 0), false);
 		model.setLegRotation(glm::vec3(sin(walkCounter * 2)*0.4f, 0, 0), true);
 		model.setHeadRotation(glm::vec3(-cam->getRot().x, 0, 0));
 		model.setBodyRotation(glm::vec3(0, cam->getRot().y + 3.1415f, 0));
+		if (item.isBlock()) {
+			item.getTrans().SetRot(glm::vec3(0, 3.1415 / 2.0f + model.getArmRot().y, 0));
+		}
+		else {
+			item.getTrans().SetRot(glm::vec3(-3.1415f, -3.1415 / 2.0f - model.getArmRot().y, -3.1415f));
+		}
 	}
-
+	
 	int forMul = Evt_Keyboard::isKeyDown(KEY_W) ? 1 : (Evt_Keyboard::isKeyDown(KEY_S) ? -1 : 0);
 	int rightMul = Evt_Keyboard::isKeyDown(KEY_D) ? 1 : (Evt_Keyboard::isKeyDown(KEY_A) ? -1 : 0);
-	ItemStack& item = inven.getItem(handIndex);
 	//Accelerate
 	if (forMul != 0 || rightMul != 0) {
 
 		walking = true;
 		walkCounter += 0.05f;
-		item.getTrans().SetPos(handPos + glm::vec3(0,sinf(walkCounter)*0.05f,0));
+		if (viewMode == VIEW_MODE::FIRST_PERSON) {
+			item.getTrans().SetPos(handPos + glm::vec3(0, sinf(walkCounter) * 0.05f, 0));
+		}
 
 		glm::vec3 forward = cam->getForward();
 		forward.y = 0;//No height component
@@ -204,20 +243,24 @@ void Player::setPos(glm::vec3 pos) {
 
 	m_position = pos;
 	cam->setPos(m_position + glm::vec3(0, height, 0));
-	if (isThirdperson) {
+	if (viewMode != VIEW_MODE::FIRST_PERSON) {
 		model.setPos(pos - glm::vec3(0, width, 0));
+		ItemStack& item = inven.getItem(handIndex);
+		item.getTrans().SetPos(model.getHandPos(true, !item.isBlock()));
 	}
 
 }
 
-void Player::thirdperson(bool set) {
-	isThirdperson = set;
-	model.setVisible(set);
-	if (set) {
-		cam->setOffset(thirdpersonDistance);
+void Player::setViewMode(VIEW_MODE mode) {
+	viewMode = mode;
+	if (viewMode != VIEW_MODE::FIRST_PERSON) {
+		cam->setOffset(thirdpersonDistance * (viewMode == VIEW_MODE::THIRD_PERSON ? 1.0f : -1.0f));
 		model.setPos(m_position - glm::vec3(0, width, 0));
+		model.setVisible(true);
 	}
 	else {
 		cam->setOffset(0.0f);
+		model.setVisible(false);
 	}
+	setHand(handIndex);
 }

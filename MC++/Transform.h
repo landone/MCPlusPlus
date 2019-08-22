@@ -13,7 +13,8 @@ public:
 		m_scale(scale) {}
 
 	glm::mat4 GetMatrix();
-	inline glm::mat4& GetRotMatrix() { return rotMatr; }
+	inline glm::mat4 GetRotMatrix() { return rotMatr; }
+	inline glm::mat4 GetScaleMatrix() { return scaleMatr; }
 	inline glm::vec3 GetPos() { return m_pos; }
 	inline glm::vec3 GetRot() { return m_rot; }
 	inline glm::vec3 GetScale() { return m_scale; }

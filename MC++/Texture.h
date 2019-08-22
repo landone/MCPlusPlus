@@ -26,8 +26,8 @@ public:
 
 	std::string pathway;
 private:
-	GLuint m_texture;
-	int width, height;
+	GLuint m_texture = 0;
+	int width = 0, height = 0;
 
 	GLuint CreateTexture(const std::string &fileName);
 };

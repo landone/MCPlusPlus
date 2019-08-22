@@ -9,6 +9,12 @@
 
 class World;
 
+enum VIEW_MODE {
+	FIRST_PERSON,
+	THIRD_PERSON,
+	THIRD_PERSON_FRONT
+};
+
 class Player : private MouseListener, DisplayListener {
 public:
 
@@ -20,7 +26,7 @@ public:
 	void move(float x, float y, float z) { move(glm::vec3(x, y, z)); }
 	void move(glm::vec3 amt) { setPos(getPos() + amt); }
 	void setHand(int index);
-	void thirdperson(bool set);
+	void setViewMode(VIEW_MODE);
 
 	glm::vec3 getPos() { return m_position; }
 	Camera* getCamera() { return cam; }
@@ -31,11 +37,14 @@ private:
 	void onMousePress(int button, int x, int y) override;
 	void onMouseWheel(double) override;
 	void onFrame(double delta) override;
+	void onDrawGUI(GBuffer& gBuffer) override;
 
 	Camera* cam = Camera::create();
-	bool isThirdperson = false;
+	VIEW_MODE viewMode = FIRST_PERSON;
 	float thirdpersonDistance = 3.0f;
 	MDL_Human model;
+
+	Graphic crosshair, hotbar, hotbarSelect;
 	
 	glm::vec3 m_position;
 	World& world;

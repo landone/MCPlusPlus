@@ -28,7 +28,6 @@ void World::spawnItem(MATERIAL m, glm::vec3 pos) {
 	stack.setMaterial(m);
 	stack.setPhysical(true);
 	stack.setGUI(false);
-	stack.getTrans().SetScale(glm::vec3(0.4, 0.4, 0.4));
 	stack.getTrans().SetPos(pos + glm::vec3(0.5, 0.3, 0.5));
 
 }

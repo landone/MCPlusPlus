@@ -24,7 +24,12 @@ public:
 		m_perspective = glm::perspective(m_fov, m_aspect, m_znear, m_zfar);
 	}
 
+	void setOffset(float offset) {
+		this->offset = offset;
+	}
+
 	double getFOV() { return m_fov; }
+	float getOffset() { return offset; }
 
 	glm::vec3& getForward() { return m_forward; }
 	glm::vec3& getUp() { return m_up; }
@@ -33,7 +38,8 @@ public:
 	void setRot(glm::vec3 amt) override;
 
 	glm::mat4 getViewMatrix() {
-		return m_perspective * glm::lookAt(getPos(), getPos() + m_forward, m_up);
+		glm::vec3 pos = getPos() - m_forward * offset;
+		return m_perspective * glm::lookAt(pos, pos + m_forward * (offset >= 0.0f ? 1.0f : -1.0f), m_up);
 	}
 
 protected:
@@ -45,6 +51,7 @@ private:
 
 	void initialize(const glm::vec3& pos, double fov, double aspect, double zNear, double zFar);
 
+	float offset = 0.0f;
 	glm::mat4 m_perspective;
 	glm::vec3 m_forward;
 	glm::vec3 m_up;

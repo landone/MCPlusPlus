@@ -222,6 +222,17 @@ MDL_Human::MDL_Human() {
 
 }
 
+glm::vec3 MDL_Human::getHandPos(bool right, bool tip) {
+
+	int index = right ? 5 : 4;
+	glm::vec3 radius(0, verts[5][1].position.y, tip ? -4 * pxSz : 0);
+	return trans[index].GetPos() + glm::vec3((trans[index].GetRotMatrix() * trans[index].GetScaleMatrix()) * glm::vec4(radius, 1.0f));
+}
+
+glm::vec3 MDL_Human::getArmRot(bool right) {
+	return trans[right ? 5 : 4].GetRot();
+}
+
 void MDL_Human::setPos(vec3 pos) {
 
 	trans[1].SetPos(pos + vec3(0,12,0) * pxSz);

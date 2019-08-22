@@ -17,6 +17,9 @@ public:
 	void setBodyRotation(glm::vec3);
 	void setVisible(bool set) { visible = set; }
 
+	glm::vec3 getHandPos(bool right = true, bool tip = true);
+	glm::vec3 getArmRot(bool right = true);
+
 	void onDrawGeometry(GBuffer&) override;
 
 private:
