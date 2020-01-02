@@ -34,7 +34,7 @@ public:
 
 private:
 	Transform trans;
-	MATERIAL mat;
+	MATERIAL mat = MATERIAL::AIR;
 	BlockFace faces[6];
 	vector<BlockFace*> visibleFaces;
 };

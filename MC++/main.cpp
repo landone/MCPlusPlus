@@ -50,7 +50,6 @@ int main() {
 	while (disp.isOpen()) {
 
 		counter += 0.05f;
-
 		thisFrame = clock();
 		Evt_Display::sendFrame((thisFrame - lastFrame) / 1000.0);
 		fps += (thisFrame - lastFrame) / 1000.0;

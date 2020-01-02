@@ -13,7 +13,7 @@ uniform vec3 tint;
 uniform bool gui;
 
 void main(){
-	
+
 	vec4 origColor = texture(texMap, TexCoords);
 	if(origColor.a < 1){
 		discard;

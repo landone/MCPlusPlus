@@ -1,0 +1,108 @@
+﻿  BasicShader.cpp
+  Block.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Block.cpp(64,21): warning C4244: 'initializing': conversion from '__int64' to 'unsigned int', possible loss of data
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Block.cpp(78,12): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+  BlockFace.cpp
+  Camera.cpp
+  Chunk.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Chunk.cpp(116,21): warning C4244: 'initializing': conversion from '__int64' to 'unsigned int', possible loss of data
+  Display.cpp
+  Entity.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Entity.cpp(26,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Evt_Display.cpp
+  Evt_Keyboard.cpp
+  Evt_Mouse.cpp
+  GameAssetLoader.cpp
+  GameDisplay.cpp
+  GBuffer.cpp
+  Graphic.cpp
+  Inventory.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Inventory.h(18,13): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Items.cpp
+  ItemStack.cpp
+  LightShader.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\LightShader.cpp(25,81): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\LightShader.cpp(26,75): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\LightShader.cpp(28,55): warning C4267: 'argument': conversion from 'size_t' to 'GLint', possible loss of data
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\LightShader.cpp(36,22): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Inventory.h(18,13): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Material.cpp
+  Generating Code...
+  Compiling...
+  MDL_Human.cpp
+  Mesh.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Mesh.cpp(6,28): warning C4267: '=': conversion from 'size_t' to 'GLuint', possible loss of data
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Mesh.cpp(13,29): warning C4267: '=': conversion from 'size_t' to 'GLuint', possible loss of data
+  Player.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Inventory.h(18,13): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PostProcessor.cpp
+  Shader.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Shader.cpp(107,46): warning C4267: '=': conversion from 'size_t' to 'GLint', possible loss of data
+  stb_image.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(297,9): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(305,17): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(345,9): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(367,17): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(505,12): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(518,12): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(591,10): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(629,43): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(647,43): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(1564,43): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(1593,59): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(1611,42): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2605,43): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2730,47): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2736,64): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2745,30): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2747,23): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2756,46): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2792,14): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2796,13): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2818,19): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2821,54): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2832,28): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(2872,47): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3072,24): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3083,28): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3087,11): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3267,10): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3271,10): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3279,10): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3287,10): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3300,10): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3317,10): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3321,19): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3469,26): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3497,11): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3508,34): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3509,34): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3523,12): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3542,34): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3560,31): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3571,17): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3581,32): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3608,25): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3609,32): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3826,23): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3830,38): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3836,13): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3848,12): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3877,48): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3885,46): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3902,17): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3935,17): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(3969,11): warning C4312: 'type cast': conversion from 'int' to 'unsigned char *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(4082,10): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(4091,24): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(4096,40): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(4100,40): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\stb_image.cpp(4150,63): warning C4312: 'type cast': conversion from 'int' to 'float *' of greater size
+  Text.cpp
+C:\Users\animo\Documents\GitHub\MCPlusPlus\MC++\Text.cpp(58,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Texture.cpp
+  Transform.cpp
+  World.cpp
+  Generating Code...
+  MC++.vcxproj -> C:\Users\animo\Documents\GitHub\MCPlusPlus\x64\Debug\MC++.exe

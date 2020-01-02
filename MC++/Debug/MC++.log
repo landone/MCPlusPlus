@@ -1,2 +1,141 @@
-﻿  Block.cpp
-  MC++.vcxproj -> C:\Users\animo\Documents\GitHub\MCPlusPlus\Debug\MC++.exe
+﻿  BasicShader.cpp
+  Block.cpp
+  BlockFace.cpp
+  Camera.cpp
+  Chunk.cpp
+  Display.cpp
+  Entity.cpp
+  Evt_Display.cpp
+  Evt_Keyboard.cpp
+  GameAssetLoader.cpp
+  GameDisplay.cpp
+  GBuffer.cpp
+  Graphic.cpp
+  Inventory.cpp
+  ItemStack.cpp
+  LightShader.cpp
+  main.cpp
+  MDL_Human.cpp
+  Mesh.cpp
+  Player.cpp
+  Generating Code...
+  Compiling...
+  PostProcessor.cpp
+  Shader.cpp
+  Text.cpp
+  Texture.cpp
+  World.cpp
+  Generating Code...
+Texture.obj : error LNK2001: unresolved external symbol __imp__glBindTexture@8
+BasicShader.obj : error LNK2001: unresolved external symbol __imp__glBindTexture@8
+GBuffer.obj : error LNK2001: unresolved external symbol __imp__glBindTexture@8
+LightShader.obj : error LNK2001: unresolved external symbol __imp__glBindTexture@8
+PostProcessor.obj : error LNK2001: unresolved external symbol __imp__glBindTexture@8
+PostProcessor.obj : error LNK2019: unresolved external symbol __imp__glClear@4 referenced in function "public: __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@ABV01@@Z)
+BasicShader.obj : error LNK2001: unresolved external symbol __imp__glClear@4
+Display.obj : error LNK2001: unresolved external symbol __imp__glClear@4
+GBuffer.obj : error LNK2001: unresolved external symbol __imp__glClear@4
+LightShader.obj : error LNK2001: unresolved external symbol __imp__glClear@4
+PostProcessor.obj : error LNK2001: unresolved external symbol __imp__glClearColor@16
+BasicShader.obj : error LNK2001: unresolved external symbol __imp__glClearColor@16
+Display.obj : error LNK2001: unresolved external symbol __imp__glClearColor@16
+GBuffer.obj : error LNK2001: unresolved external symbol __imp__glClearColor@16
+LightShader.obj : error LNK2001: unresolved external symbol __imp__glClearColor@16
+BasicShader.obj : error LNK2019: unresolved external symbol __imp__glGenTextures@8 referenced in function "public: unsigned int __thiscall BasicShader::createTex(bool)" (?createTex@BasicShader@@QAEI_N@Z)
+GBuffer.obj : error LNK2001: unresolved external symbol __imp__glGenTextures@8
+LightShader.obj : error LNK2001: unresolved external symbol __imp__glGenTextures@8
+Texture.obj : error LNK2001: unresolved external symbol __imp__glGenTextures@8
+BasicShader.obj : error LNK2019: unresolved external symbol __imp__glTexImage2D@36 referenced in function "public: unsigned int __thiscall BasicShader::createTex(bool)" (?createTex@BasicShader@@QAEI_N@Z)
+GBuffer.obj : error LNK2001: unresolved external symbol __imp__glTexImage2D@36
+LightShader.obj : error LNK2001: unresolved external symbol __imp__glTexImage2D@36
+Texture.obj : error LNK2001: unresolved external symbol __imp__glTexImage2D@36
+BasicShader.obj : error LNK2019: unresolved external symbol __imp__glTexParameteri@12 referenced in function "public: unsigned int __thiscall BasicShader::createTex(bool)" (?createTex@BasicShader@@QAEI_N@Z)
+GBuffer.obj : error LNK2001: unresolved external symbol __imp__glTexParameteri@12
+LightShader.obj : error LNK2001: unresolved external symbol __imp__glTexParameteri@12
+Texture.obj : error LNK2001: unresolved external symbol __imp__glTexParameteri@12
+BasicShader.obj : error LNK2001: unresolved external symbol __imp____glewDrawBuffers
+GBuffer.obj : error LNK2001: unresolved external symbol __imp____glewDrawBuffers
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewDrawBuffers
+BasicShader.obj : error LNK2001: unresolved external symbol __imp____glewUniform1i
+GBuffer.obj : error LNK2001: unresolved external symbol __imp____glewUniform1i
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewUniform1i
+PostProcessor.obj : error LNK2001: unresolved external symbol __imp____glewUniform1i
+BasicShader.obj : error LNK2001: unresolved external symbol __imp____glewUniform3fv
+GBuffer.obj : error LNK2001: unresolved external symbol __imp____glewUniform3fv
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewUniform3fv
+BasicShader.obj : error LNK2001: unresolved external symbol __imp____glewUniformMatrix4fv
+GBuffer.obj : error LNK2001: unresolved external symbol __imp____glewUniformMatrix4fv
+Text.obj : error LNK2001: unresolved external symbol __imp____glewBindFramebuffer
+BasicShader.obj : error LNK2001: unresolved external symbol __imp____glewBindFramebuffer
+GBuffer.obj : error LNK2001: unresolved external symbol __imp____glewBindFramebuffer
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewBindFramebuffer
+PostProcessor.obj : error LNK2001: unresolved external symbol __imp____glewBindFramebuffer
+BasicShader.obj : error LNK2001: unresolved external symbol __imp____glewFramebufferTexture2D
+GBuffer.obj : error LNK2001: unresolved external symbol __imp____glewFramebufferTexture2D
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewFramebufferTexture2D
+BasicShader.obj : error LNK2001: unresolved external symbol __imp____glewGenFramebuffers
+GBuffer.obj : error LNK2001: unresolved external symbol __imp____glewGenFramebuffers
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewGenFramebuffers
+Display.obj : error LNK2019: unresolved external symbol _SDL_GetCurrentDisplayMode referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_CreateWindow referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_SetWindowTitle referenced in function "public: void __thiscall Display::setTitle(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?setTitle@Display@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_SetWindowPosition referenced in function "public: void __thiscall Display::center(void)" (?center@Display@@QAEXXZ)
+Display.obj : error LNK2019: unresolved external symbol _SDL_SetWindowSize referenced in function "public: virtual void __thiscall Display::setSize(int,int)" (?setSize@Display@@UAEXHH@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_SetWindowFullscreen referenced in function "public: void __thiscall Display::setFullscreen(bool)" (?setFullscreen@Display@@QAEX_N@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_DestroyWindow referenced in function "public: __thiscall Display::~Display(void)" (??1Display@@QAE@XZ)
+Display.obj : error LNK2019: unresolved external symbol _SDL_GL_SetAttribute referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_GL_CreateContext referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_GL_SwapWindow referenced in function "public: void __thiscall Display::update(void)" (?update@Display@@QAEXXZ)
+Display.obj : error LNK2019: unresolved external symbol _SDL_GL_DeleteContext referenced in function "public: __thiscall Display::~Display(void)" (??1Display@@QAE@XZ)
+Display.obj : error LNK2019: unresolved external symbol _SDL_SetRelativeMouseMode referenced in function "public: void __thiscall Display::relativeCursor(bool)" (?relativeCursor@Display@@QAEX_N@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_ShowCursor referenced in function "public: void __thiscall Display::hideCursor(bool)" (?hideCursor@Display@@QAEX_N@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_PollEvent referenced in function "public: void __thiscall Display::update(void)" (?update@Display@@QAEXXZ)
+Display.obj : error LNK2019: unresolved external symbol _SDL_Init referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol _SDL_Quit referenced in function "public: __thiscall Display::~Display(void)" (??1Display@@QAE@XZ)
+Display.obj : error LNK2019: unresolved external symbol __imp__glBlendFunc@8 referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol __imp__glCullFace@4 referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol __imp__glEnable@4 referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+main.obj : error LNK2001: unresolved external symbol __imp__glEnable@4
+Display.obj : error LNK2019: unresolved external symbol __imp__glViewport@16 referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Display.obj : error LNK2019: unresolved external symbol __imp__glewInit@0 referenced in function "public: __thiscall Display::Display(int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0Display@@QAE@HHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+GameAssetLoader.obj : error LNK2019: unresolved external symbol __imp__glGetIntegerv@8 referenced in function "public: static void __cdecl GameAssetLoader::loadGUI(void)" (?loadGUI@GameAssetLoader@@SAXXZ)
+Text.obj : error LNK2001: unresolved external symbol __imp__glGetIntegerv@8
+GameAssetLoader.obj : error LNK2001: unresolved external symbol __imp____glewGetTextureImage
+GameAssetLoader.obj : error LNK2001: unresolved external symbol __imp____glewDeleteFramebuffers
+GBuffer.obj : error LNK2019: unresolved external symbol __imp__glPolygonMode@8 referenced in function "public: void __thiscall GBuffer::setWireFrame(bool)" (?setWireFrame@GBuffer@@QAEX_N@Z)
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewActiveTexture
+PostProcessor.obj : error LNK2001: unresolved external symbol __imp____glewActiveTexture
+Texture.obj : error LNK2001: unresolved external symbol __imp____glewActiveTexture
+LightShader.obj : error LNK2001: unresolved external symbol __imp____glewUniform4fv
+main.obj : error LNK2019: unresolved external symbol __imp__glDisable@4 referenced in function _main
+Mesh.obj : error LNK2019: unresolved external symbol __imp__glDrawElements@16 referenced in function "public: void __thiscall Mesh::draw(void)" (?draw@Mesh@@QAEXXZ)
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewBindBuffer
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewBufferData
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewBufferSubData
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewGenBuffers
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewEnableVertexAttribArray
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewVertexAttribPointer
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewBindVertexArray
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewDeleteVertexArrays
+Mesh.obj : error LNK2001: unresolved external symbol __imp____glewGenVertexArrays
+PostProcessor.obj : error LNK2001: unresolved external symbol __imp____glewUniform1f
+PostProcessor.obj : error LNK2001: unresolved external symbol __imp____glewUniform2fv
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewAttachShader
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewBindAttribLocation
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewCompileShader
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewCreateProgram
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewCreateShader
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewDeleteProgram
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewDeleteShader
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewDetachShader
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewGetProgramInfoLog
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewGetProgramiv
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewGetShaderInfoLog
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewGetShaderiv
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewGetUniformLocation
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewLinkProgram
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewShaderSource
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewUseProgram
+Shader.obj : error LNK2001: unresolved external symbol __imp____glewValidateProgram
+Texture.obj : error LNK2019: unresolved external symbol __imp__glDeleteTextures@8 referenced in function "public: static void __cdecl Texture::unloadAll(void)" (?unloadAll@Texture@@SAXXZ)
+C:\Users\animo\source\repos\MC++\Debug\MC++.exe : fatal error LNK1120: 71 unresolved externals

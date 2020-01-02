@@ -30,5 +30,8 @@ private:
 	glm::vec3 m_pos;
 	glm::vec3 m_rot;
 	glm::vec3 m_scale;
-	glm::mat4 matrix, posMatr, rotMatr, scaleMatr;
+	glm::mat4 matrix = glm::mat4(1);
+	glm::mat4 posMatr = glm::mat4(1);
+	glm::mat4 rotMatr = glm::mat4(1);
+	glm::mat4 scaleMatr = glm::mat4(1);
 };
