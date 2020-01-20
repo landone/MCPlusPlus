@@ -23,7 +23,7 @@ void Mesh::setQuadTextureCoord(glm::vec2 bottomLeft, glm::vec2 topRight) {
 	vertices[1].texCoord = topRight;
 	vertices[2].texCoord = glm::vec2(topRight.x, bottomLeft.y);
 	vertices[3].texCoord = bottomLeft;
-
+	
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), &vertices[0]);

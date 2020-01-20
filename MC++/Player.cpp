@@ -13,6 +13,7 @@ hotbar(GameAssetLoader::getGUI(GUI_HOTBAR)), hotbarSelect(GameAssetLoader::getGU
 
 	hotbar.trans.SetPos(glm::vec3(hotbar.trans.GetPos().x, -1, 0));
 	hotbarSelect.trans.SetPos(hotbar.trans.GetPos());
+	model.setVisible(false);
 	
 	if (text == nullptr) {
 		text = new Text();
@@ -179,14 +180,13 @@ void Player::onFrame(double delta) {
 	}
 
 	if (floorBlock) {//On ground
-
 		//Friction
 		glm::vec2 flatVel = glm::vec2(velocity.x, velocity.z);
 		if (glm::length(flatVel) > 0.0f) {
 			flatVel = glm::normalize(flatVel) * glm::max(0.0f, glm::length(flatVel) - friction * (float)delta);
+			velocity = glm::vec3(flatVel.x, velocity.y, flatVel.y);
 		}
-		velocity = glm::vec3(flatVel.x, velocity.y, flatVel.y);
-
+		/* TODO: Replace with and implement isKeyPressed */
 		if (Evt_Keyboard::isKeyDown(KEY_SPACE)) {//Jump
 			velocity.y += jumpStrength;
 		}
@@ -196,30 +196,73 @@ void Player::onFrame(double delta) {
 		velocity.y -= gravity * (float)delta;
 	}
 
-
-	floorBlock = nullptr; //Reset
-
 	glm::vec3 pos = getPos();
+	floorBlock = nullptr; //Reset
+	/* Check for current collisions */
+	for (int i = 0; i < 6; i++) {
+		glm::vec3 norm;
+		switch (i) {
+		case 0:
+			norm = glm::vec3(-1, 0, 0);
+			break;
+		case 1:
+			norm = glm::vec3(1, 0, 0);
+			break;
+		case 2:
+			norm = glm::vec3(0, -1, 0);
+			break;
+		case 3:
+			norm = glm::vec3(0, 1, 0);
+			break;
+		case 4:
+			norm = glm::vec3(0, 0, -1);
+			break;
+		case 5:
+			norm = glm::vec3(0, 0, 1);
+			break;
+		}
+		Block* col = world.traceRay(pos, norm, width, false, nullptr, nullptr);
+		if (i == 2) {
+			floorBlock = col;
+		}
+		if (col) {
+			float component = glm::dot(velocity, norm);
+			/* If component in correct direction */
+			if (component > 0) {
+				velocity -= component * norm;
+			}
+		}
+	}
+	/* Check for incoming collisions */
 	glm::vec3 point, axis;
 	bool checkAgain = true;
 	std::vector<glm::vec3> collisions;
-	while (checkAgain && world.traceRay(pos, glm::normalize(velocity), glm::length(velocity) + width, false, &point, &axis) != nullptr) {
-		
-		if (glm::distance(pos, point) > 0.0f) {
-			collisions.push_back(point);
+	Block* lastBlock = nullptr;
+	Block* currBlock = nullptr;
+	while (checkAgain && (currBlock = world.traceRay(pos, glm::normalize(velocity), glm::length(velocity) + width, false, &point, &axis)) != nullptr) {
+
+		if (axis.y == 1) {
+			floorBlock = currBlock;
 		}
+
+		if (lastBlock == currBlock) {
+			/* Save us from raytracing purgatory */
+			velocity += axis * 0.0005f;
+			lastBlock = currBlock;
+			continue;
+		}
+		lastBlock = currBlock;
+
+		float dist = glm::distance(pos, point);
+		collisions.push_back(point);
 		checkAgain = glm::length(axis) == 1.0f;
-		velocity -= glm::dot(velocity, axis) * axis;
+		float component = glm::dot(velocity, axis);
+		float ratio = glm::clamp((1 - ((dist - width) / abs(component))), 0.0f, 1.0f);
+		velocity -= (component * ratio) * axis;
 
 	}
 
-	if (world.traceRay(pos, glm::vec3(0, -1, 0), width, false, &point, nullptr) != nullptr) {
-		floorBlock = world.getBlockAt(pos);
-		if (glm::distance(pos, point) > 0.0f) {
-			collisions.push_back(point);
-		}
-	}
-
+	/* Find closest collision point */
 	if (collisions.size() > 0) {
 		glm::vec3 closest;
 		float distance = INFINITY;
@@ -231,7 +274,7 @@ void Player::onFrame(double delta) {
 		}
 
 		glm::vec3 colDir = glm::normalize(pos - closest);
-		setPos(closest + colDir * width);
+		//setPos(closest + colDir * width);
 
 	}
 

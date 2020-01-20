@@ -62,12 +62,12 @@ private:
 	float maxRunSpeed = 0.12f;
 	int reach = 5;
 	float height = 1.5f;
-	float width = 0.3f;//Radius
+	float width = 0.45f;//Radius
 
 	glm::vec3 velocity;
 	float gravity = 0.4f;
 	float friction = 0.4f;
-	float jumpStrength = 0.05f;
+	float jumpStrength = 0.1f;
 	Block* floorBlock = nullptr;
 
 };
